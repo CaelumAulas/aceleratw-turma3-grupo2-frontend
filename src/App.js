@@ -1,10 +1,11 @@
-import { Container, Typography } from '@material-ui/core';
+import React from "react";
+import Login from "./screens/Login/Login";
 
 function App() {
   return (
-    <Container>
-      <Typography>Teste 123</Typography>
-    </Container>
+    <>
+      <Login />
+    </>
   );
 }
 
