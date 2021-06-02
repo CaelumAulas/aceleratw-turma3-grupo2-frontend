@@ -1,14 +1,13 @@
-import React from "react";
-// import Login from "./screens/Login/Login";
-import Dashboard from "screens/Dashboard/Dashboard";
+import React, { useState } from "react";
+import Login from "./screens/Login/Login";
+import Dashboard from "./screens/Dashboard/Dashboard";
 
 function App() {
-  return (
-    <>
-      {/* <Login /> */}
-      <Dashboard />
-    </>
-  );
+  const [active] = useState(0);
+
+  const screens = [<Login key="login" />, <Dashboard key="dashboard" />];
+
+  return <>{screens[active]}</>;
 }
 
 export default App;
