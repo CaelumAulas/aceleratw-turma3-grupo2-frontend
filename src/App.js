@@ -8,7 +8,7 @@ import Vehicle from "./screens/Vehicle/VehicleRegistration";
 import UserForgotPassword from "./screens/User/UserForgotPassword";
 
 function App() {
-  const [active] = useState(0);
+  const [active] = useState(6);
 
   const screens = [
     <Login key="login" />,
