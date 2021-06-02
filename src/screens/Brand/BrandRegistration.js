@@ -1,13 +1,13 @@
 import React from "react";
 import { ContainerFullHeight } from "components/ContainerFullHeight/ContainerFullHeight";
-import UserRegistrationForm from "fragments/User/UserRegistrationForm";
+import BrandRegistrationForm from "fragments/Brand/BrandRegistrationForm";
 
-const UserRegistration = () => {
+const BrandRegistration = () => {
   return (
     <ContainerFullHeight>
-      <UserRegistrationForm />
+      <BrandRegistrationForm />
     </ContainerFullHeight>
   );
 };
 
-export default UserRegistration;
+export default BrandRegistration;
