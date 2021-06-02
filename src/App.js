@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Login from "./screens/Login/Login";
 
 function App() {
-  return (
-    <>
-      <Login />
-    </>
-  );
+  const [active] = useState(0);
+
+  const screens = [<Login key="login" />];
+
+  return <>{screens[active]}</>;
 }
 
 export default App;
