@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@material-ui/core";
+import MUIDataTable from "mui-datatables";
 
 const columns = ["Nome"];
 
@@ -9,7 +10,7 @@ const options = {
   filterType: "checkbox",
 };
 
-const ListUserForm = () => {
+const ListUserTable = () => {
   return (
     <>
       <MUIDataTable
@@ -44,4 +45,4 @@ const ListUserForm = () => {
   );
 };
 
-export default ListUserForm;
+export default ListUserTable;

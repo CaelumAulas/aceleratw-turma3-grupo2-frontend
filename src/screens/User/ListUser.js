@@ -1,11 +1,11 @@
 import React from "react";
 import { ContainerFullHeight } from "components/ContainerFullHeight/ContainerFullHeight";
-import ListUserForm from "fragments/User/ListUserForm";
+import ListUserTable from "fragments/User/ListUserTable";
 
 const ListUsers = () => {
   return (
     <ContainerFullHeight>
-      <ListUserForm />
+      <ListUserTable />
     </ContainerFullHeight>
   );
 };
