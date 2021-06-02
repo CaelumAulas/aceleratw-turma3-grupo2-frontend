@@ -5,7 +5,6 @@ import { Button } from "@material-ui/core";
 
 const UserRegistrationForm = () => {
   return (
-    <>
       <GridFullHeight
         container
         direction="column"
@@ -38,7 +37,6 @@ const UserRegistrationForm = () => {
           </Button>
         </div>
       </GridFullHeight>
-    </>
   );
 };
 

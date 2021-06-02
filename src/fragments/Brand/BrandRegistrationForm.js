@@ -5,7 +5,6 @@ import { Button } from "@material-ui/core";
 
 const BrandRegistrationForm = () => {
   return (
-    <>
       <GridFullHeight
         container
         direction="column"
@@ -33,7 +32,6 @@ const BrandRegistrationForm = () => {
           </Button>
         </div>
       </GridFullHeight>
-    </>
   );
 };
 
