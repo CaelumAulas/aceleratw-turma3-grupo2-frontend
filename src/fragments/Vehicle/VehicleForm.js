@@ -8,7 +8,7 @@ import Select from '@material-ui/core/Select';
 
 
 
-const VeiculoForm = () =>{
+const VehicleForm = () =>{
 
 
     return(
@@ -38,4 +38,4 @@ const VeiculoForm = () =>{
     );
 };
 
-export default VeiculoForm;
+export default VehicleForm;

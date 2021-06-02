@@ -1,13 +1,25 @@
-import React from "react";
-/*import Login from "./screens/Login/Login";*/
-import Veiculo from "./screens/Veiculo/Veiculo";
+import React, { useState } from "react";
+import Login from "./screens/Login/Login";
+import UserRegistration from "./screens/User/UserRegistration";
+import BrandRegistration from "./screens/Brand/BrandRegistration";
+import ListUser from "./screens/User/ListUser";
+import ListBrand from "./screens/Brand/ListBrand";
+import Vehicle from "./screens/Vehicle/VehicleRegistration";
 
 function App() {
-  return (
-    <>
-      <Veiculo />
-    </>
-  );
+  const [active] = useState(0);
+
+  const screens = [
+    <Login key="login" />,
+    <UserRegistration key="userRegistration" />,
+    <BrandRegistration key="brandRegistration" />,
+    <ListUser key="listUser" />,
+    <ListBrand key="listBrand" />,
+    <Vehicle key= "vehicleRegistration" />
+
+  ];
+
+  return <>{screens[active]}</>;
 }
 
 export default App;
