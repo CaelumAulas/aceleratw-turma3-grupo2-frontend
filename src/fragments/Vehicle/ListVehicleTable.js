@@ -4,9 +4,9 @@ import MUIDataTable from "mui-datatables";
 
 const columns = ["Brand", "Model", "Year", "Value"];
 
-const data = [["Ford", "Ford KA", "2018", "30"],
-              ["Fiat", "Palio", "2015", "32"],
-              ["Honda", "Civic", "2019", "45"]];
+const data = [["Ford", "Ford KA", "2018", "30.000"],
+              ["Fiat", "Palio", "2015", "32.000"],
+              ["Honda", "Civic", "2019", "45.000"]];
 const options = {
   filterType: "checkbox",
 };
