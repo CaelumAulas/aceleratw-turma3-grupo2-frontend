@@ -6,9 +6,10 @@ import ListUser from "./screens/User/ListUser";
 import ListBrand from "./screens/Brand/ListBrand";
 import Vehicle from "./screens/Vehicle/VehicleRegistration";
 import UserForgotPassword from "./screens/User/UserForgotPassword";
+import ListVehicleTable from "fragments/Vehicle/ListVehicleTable";
 
 function App() {
-  const [active] = useState(6);
+  const [active] = useState(7);
 
   const screens = [
     <Login key="login" />,
@@ -17,7 +18,8 @@ function App() {
     <UserForgotPassword key="userForgotpassword" />,
     <ListUser key="listUser" />,
     <ListBrand key="listBrand" />,
-    <Vehicle key= "vehicleRegistration" />
+    <Vehicle key= "vehicleRegistration" />,
+    <ListVehicleTable key="listVehicle" />
 
   ];
 
