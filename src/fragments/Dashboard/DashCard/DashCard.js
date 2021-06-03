@@ -9,7 +9,15 @@ import {
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
+  paperContainer: {
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+      marginRight: 0,
+      marginBottom: 20
+    },
+    marginRight: 20
+  },
   paper: {
     height: 400,
     width: "100%",
@@ -22,7 +30,7 @@ const useStyles = makeStyles(() => ({
 const DashCard = ({ size, brand, quantity, value }) => {
   const classes = useStyles();
   return (
-    <Grid xs={size} item>
+    <Grid md={size} item className={classes.paperContainer}>
       <Paper className={classes.paper}>
         <Grid
           container

@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
   },
   papersContainer: {
     height: "100%",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+    }
   },
   control: {
     padding: theme.spacing(2),
@@ -43,15 +46,18 @@ const Dashboard = () => {
       justify="center"
       alignItems="flex-end"
     >
-      <Grid container className={classes.root} spacing={2}>
+      <Grid
+        container
+        direction="column"
+        className={classes.root}
+        spacing={2}
+      >
         <Grid item xs={12}>
           <Grid
             container
-            className={classes.papersContainer}
-            justify="center"
             alignItems="center"
-            spacing={2}
-            wrap="wrap"
+            justify="center"
+            className={classes.papersContainer}
           >
             {mockedData.map(({ brand, total, quantity }, index) => (
               <DashCard

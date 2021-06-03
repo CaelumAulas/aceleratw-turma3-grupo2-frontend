@@ -1,7 +1,9 @@
-#root{
-    height: 100vh;
-}
-
 * {
     font-family: Roboto, sans-serif;
+}
+
+@media (min-width: 1280px) {
+    #root{
+        height: 100vh;
+    }
 }
