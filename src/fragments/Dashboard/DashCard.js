@@ -11,20 +11,20 @@ import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
   paperContainer: {
-    [theme.breakpoints.down('md')]: {
-      width: '100%',
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
       marginRight: 0,
-      marginBottom: 20
+      marginBottom: 20,
     },
-    marginRight: 20
+    marginRight: 20,
   },
   paper: {
     height: 400,
     width: "100%",
   },
   paperContent: {
-    height: '100%'
-  }
+    height: "100%",
+  },
 }));
 
 const DashCard = ({ size, brand, quantity, value }) => {
@@ -47,7 +47,10 @@ const DashCard = ({ size, brand, quantity, value }) => {
               {quantity} {quantity > 1 ? "veículos" : "veículo"}
             </Typography>
             <Typography align="center" variant="inherit" component="p">
-              {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)}
+              {new Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              }).format(value)}
             </Typography>
           </Container>
         </Grid>
