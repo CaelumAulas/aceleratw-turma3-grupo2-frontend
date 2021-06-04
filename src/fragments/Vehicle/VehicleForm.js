@@ -1,47 +1,58 @@
 import React from "react";
-import { Button } from "@material-ui/core"
-import { GridFullHeight } from "components/GridFullHeight/GridFullHeight"
-import TextInput from "components/TextInput/TextInput"
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
+import CustomButton from "components/CustomButton/CustomButton";
+import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
+import TextInput from "components/TextInput/TextInput";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
+import vehicleStyles from "./styles";
 
-const VehicleForm = () =>{
-
-  const [marca, setMarca] = React.useState('');
+const VehicleForm = () => {
+  const [marca, setMarca] = React.useState("");
   const handleChange = (event) => {
     setMarca(event.target.value);
   };
-    return(
-        <>
-            <GridFullHeight
-              container
-              direction="column"
-              justify="center"
-              alignItems="flex-end"
-            >
-           
-            <FormControl variant="filled"  fullWidth>
-            <InputLabel variant="filled"  id="selectMarca">Brand</InputLabel>
+
+  const classes = vehicleStyles();
+  return (
+    <>
+      <GridFullHeight
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <form>
+          <FormControl variant="filled" fullWidth>
+            <InputLabel variant="filled" id="selectMarca">
+              Brand
+            </InputLabel>
             <Select value={marca} onChange={handleChange}>
-                <MenuItem value=" "><em>None</em></MenuItem>
-                <MenuItem value={1}>Fiat</MenuItem>
-                <MenuItem value={2}>Honda</MenuItem>
+              <MenuItem value=" ">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={1}>Fiat</MenuItem>
+              <MenuItem value={2}>Honda</MenuItem>
             </Select>
-            </FormControl>
+          </FormControl>
 
-            <TextInput id="modelo" label="Model"/>
-            <TextInput id="ano" label="Year" />
-            <TextInput id="valor" label="Value" />
-            <div>
-                <Button variant="contained"  color="primary"> Cadastrar</Button>
-                <Button variant="contained" color="secondary">Cancelar</Button>
-            </div>
+          <TextInput id="model" label="Model" />
+          <TextInput id="year" label="Year" />
+          <TextInput id="value" label="Value" />
 
-            </GridFullHeight>
-        </>
-    );
+          <div style={{ display: "flex" }}>
+            <CustomButton
+              type="submit"
+              label="Cadastrar"
+              className={classes.submitButton}
+            />
+            <CustomButton type="reset" color="secondary" label="Cancelar" />
+          </div>
+        </form>
+      </GridFullHeight>
+    </>
+  );
 };
 
 export default VehicleForm;
