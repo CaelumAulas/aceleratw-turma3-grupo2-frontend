@@ -1,22 +1,22 @@
 import React from "react";
 import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
 import TextInput from "components/TextInput/TextInput";
-import { Button } from "@material-ui/core";
+import CustomButton from "components/CustomButton/CustomButton";
 
 const LoginForm = () => {
   return (
-      <GridFullHeight
-        container
-        direction="column"
-        justify="center"
-        alignItems="flex-end"
-      >
+    <GridFullHeight
+      container
+      direction="column"
+      justify="center"
+      alignItems="center"
+    >
+      <form>
         <TextInput id="username" label="Usuário" />
         <TextInput id="password" label="Senha" type="password" />
-        <Button variant="contained" color="primary">
-          Logar
-        </Button>
-      </GridFullHeight>
+        <CustomButton label="Logar" />
+      </form>
+    </GridFullHeight>
   );
 };
 

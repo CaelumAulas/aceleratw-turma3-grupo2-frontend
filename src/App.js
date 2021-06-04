@@ -6,7 +6,7 @@ import ListUser from "./screens/User/ListUser";
 import ListBrand from "./screens/Brand/ListBrand";
 
 function App() {
-  const [active] = useState(0);
+  const [active] = useState(3);
 
   const screens = [
     <Login key="login" />,
