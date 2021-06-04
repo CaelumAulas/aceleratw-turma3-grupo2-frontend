@@ -1,16 +1,20 @@
 import React from "react";
 import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
 import TextInput from "components/TextInput/TextInput";
-import { Button } from "@material-ui/core";
+import CustomButton from "components/CustomButton/CustomButton";
+import userStyles from "./styles";
 
 const UserRegistrationForm = () => {
+  const classes = userStyles();
+
   return (
-      <GridFullHeight
-        container
-        direction="column"
-        justify="center"
-        alignItems="flex-end"
-      >
+    <GridFullHeight
+      container
+      direction="column"
+      justify="center"
+      alignItems="center"
+    >
+      <form>
         <TextInput id="username" label="Usuário" />
         <TextInput id="password" label="Senha" type="password" />
         <TextInput
@@ -18,25 +22,16 @@ const UserRegistrationForm = () => {
           label="Confirmação de Senha"
           type="password"
         />
-        <div>
-          <Button
+        <div style={{ display: "flex" }}>
+          <CustomButton
             type="submit"
-            variant="contained"
-            color="primary"
-            margin="normal"
-          >
-            Cadastrar
-          </Button>
-          <Button
-            type="reset"
-            variant="contained"
-            color="secondary"
-            margin="normal"
-          >
-            Cancelar
-          </Button>
+            label="Cadastrar"
+            className={classes.submitButton}
+          />
+          <CustomButton type="reset" color="secondary" label="Cancelar" />
         </div>
-      </GridFullHeight>
+      </form>
+    </GridFullHeight>
   );
 };
 

@@ -9,6 +9,7 @@ import UserForgotPassword from "./screens/User/UserForgotPassword";
 
 function App() {
   const [active] = useState(1);
+
   const screens = [
     <Login key="login" />,
     <Dashboard key="dashboard" />,

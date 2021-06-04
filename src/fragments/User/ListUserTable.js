@@ -1,6 +1,7 @@
 import React from "react";
-import { Button } from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
+import CustomButton from "components/CustomButton/CustomButton";
+import userStyles from "./styles";
 
 const columns = ["Nome"];
 
@@ -11,6 +12,8 @@ const options = {
 };
 
 const ListUserTable = () => {
+  const classes = userStyles();
+
   return (
     <>
       <MUIDataTable
@@ -19,27 +22,29 @@ const ListUserTable = () => {
         columns={columns}
         options={options}
       />
-      <div>
-        <Button
+      <div
+        style={{
+          display: "flex",
+          marginTop: "10px",
+          justifyContent: "flex-end",
+        }}
+      >
+        <CustomButton
           type="reset"
-          variant="contained"
           color="secondary"
-          margin="normal"
-        >
-          Excluir
-        </Button>
-        <Button variant="contained" color="primary" margin="normal">
-          Alterar
-        </Button>
-
-        <Button
-          type="submit"
+          label="Excluir"
+          className={classes.deleteButton}
+        />
+        <CustomButton
           variant="contained"
-          color="primary"
-          margin="normal"
-        >
-          Incluir
-        </Button>
+          label="Alterar"
+          className={classes.updateButton}
+        />
+        <CustomButton
+          type="submit"
+          label="Incluir"
+          className={classes.submitButton}
+        />
       </div>
     </>
   );
