@@ -16,9 +16,9 @@ export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Login} />
         {/* <PrivateRoute path="/inicio" component={Dashboard} /> */}
-        <Route path="/inicio" component={Dashboard} />
+        <Route path="/" component={Dashboard} />
+        <Route path="/login" exact component={Login} />
         <Route path="usuarios/cadastro" component={UserRegistration} />
         <Route path="/usuarios" component={ListUsers} />
         <Route path="/marcas/cadastro" component={BrandRegistration} />
