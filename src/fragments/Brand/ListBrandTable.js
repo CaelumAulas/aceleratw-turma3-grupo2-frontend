@@ -32,16 +32,19 @@ const ListBrandTable = () => {
           type="reset"
           color="secondary"
           label="Excluir"
+          data-testid="brand-list-delete-button"
           className={classes.deleteButton}
         />
         <CustomButton
           variant="contained"
           label="Alterar"
+          data-testid="brand-list-update-button"
           className={classes.updateButton}
         />
         <CustomButton
           type="submit"
           label="Incluir"
+          data-testid="brand-list-add-button"
           className={classes.submitButton}
         />
       </div>

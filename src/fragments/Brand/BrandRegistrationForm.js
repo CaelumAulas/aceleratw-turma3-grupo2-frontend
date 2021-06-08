@@ -14,12 +14,17 @@ const BrandRegistrationForm = () => {
       alignItems="center"
     >
       <form>
-        <TextInput id="brand" label="Marca" />
+        <TextInput
+          id="brand"
+          label="Marca"
+          data-testid="register-brand-input"
+        />
         <div style={{ display: "flex" }}>
           <CustomButton
             type="submit"
             label="Cadastrar"
             className={classes.submitButton}
+            data-testid="register-brand-button"
           />
           <CustomButton type="reset" color="secondary" label="Cancelar" />
         </div>

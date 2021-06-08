@@ -12,8 +12,17 @@ const LoginForm = () => {
       alignItems="center"
     >
       <form>
-        <TextInput id="username" label="Usuário" />
-        <TextInput id="password" label="Senha" type="password" />
+        <TextInput
+          id="username"
+          label="Usuário"
+          data-testid="login-username-input"
+        />
+        <TextInput
+          id="password"
+          label="Senha"
+          type="password"
+          data-testid="login-password-input"
+        />
         <CustomButton label="Logar" />
       </form>
     </GridFullHeight>
