@@ -23,7 +23,7 @@ export default function Routes() {
         <Route path="/marcas" component={ListBrand} />
         <Route path="/veiculos/cadastro" component={VehicleRegistration} />
         <Route path="/veiculos" component={ListVehicle} />
-        <Route path="/recover" component={UserForgotPassword} />
+        <Route path="/recuperar-senha" component={UserForgotPassword} />
         <Route>
           <PageNotFound />
         </Route>
