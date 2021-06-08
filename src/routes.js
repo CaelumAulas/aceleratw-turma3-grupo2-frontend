@@ -10,12 +10,14 @@ import ListUsers from "screens/User/ListUser";
 import ListBrand from "screens/Brand/ListBrand";
 import VehicleRegistration from "screens/Vehicle/VehicleRegistration";
 import ListVehicle from "screens/Vehicle/ListVehicle";
+// import PrivateRoute from "components/PrivateRoute/PrivateRoute";
 
 export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Login} />
+        {/* <PrivateRoute path="/inicio" component={Dashboard} /> */}
         <Route path="/inicio" component={Dashboard} />
         <Route path="usuarios/cadastro" component={UserRegistration} />
         <Route path="/usuarios" component={ListUsers} />
