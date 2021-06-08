@@ -11,14 +11,16 @@ import ListBrand from "screens/Brand/ListBrand";
 import VehicleRegistration from "screens/Vehicle/VehicleRegistration";
 import ListVehicle from "screens/Vehicle/ListVehicle";
 import PageHeader from "components/PageHeader/PageHeader";
+// import PrivateRoute from "components/PrivateRoute/PrivateRoute";
 
 export default function Routes() {
   return (
     <BrowserRouter>
       <PageHeader>
         <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/inicio" component={Dashboard} />
+          {/* <PrivateRoute path="/inicio" component={Dashboard} /> */}
+          <Route exact path="/" component={Dashboard} />
+          <Route path="/login" exact component={Login} />
           <Route path="usuarios/cadastro" component={UserRegistration} />
           <Route path="/usuarios" component={ListUsers} />
           <Route path="/marcas/cadastro" component={BrandRegistration} />
