@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 
 import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
-import DashCard from "fragments/Dashboard/DashCard/DashCard";
+import DashCard from "fragments/Dashboard/DashCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
