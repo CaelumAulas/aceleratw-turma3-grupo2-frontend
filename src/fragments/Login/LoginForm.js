@@ -5,12 +5,7 @@ import CustomButton from "components/CustomButton/CustomButton";
 
 const LoginForm = () => {
   return (
-    <GridFullHeight
-      container
-      direction="column"
-      justify="center"
-      alignItems="center"
-    >
+    <GridFullHeight container direction="column" alignItems="center">
       <form>
         <TextInput
           id="username"
