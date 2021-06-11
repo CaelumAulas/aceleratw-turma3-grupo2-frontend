@@ -1,13 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import MUIDataTable from "mui-datatables";
-import brandStyles from "./styles";
-import CustomButton from "components/CustomButton/CustomButton";
 import { Link } from "react-router-dom";
 
 const columns = ["Nome"];
 
 const ListBrandTable = () => {
-  const classes = brandStyles();
   const [brands, setBrands] = useState([]);
   const [brandsSelected, setBrandsSelected] = useState([]);
   const brandsSelectedQuantity = brandsSelected.length;
@@ -17,6 +14,16 @@ const ListBrandTable = () => {
       download: false,
       print: false,
       filterType: "checkbox",
+      onRowsDelete: () => {
+        if (brandsSelected?.length) {
+          // Temporary
+          brandsSelected.forEach((brandSelected) => {
+            fetch(`http://localhost:8080/brands/${brandSelected.id}`, {
+              method: "delete",
+            });
+          });
+        }
+      },
       onRowSelectionChange: (_, allRowsSelected) => {
         const currentBrandSelected = allRowsSelected.reduce(
           (acc, rowSelected) => {
@@ -34,19 +41,8 @@ const ListBrandTable = () => {
         setBrandsSelected(currentBrandSelected);
       },
     }),
-    [brands]
+    [brands, brandsSelected]
   );
-
-  const handleDeleteBrand = useCallback(() => {
-    if (brandsSelected?.length) {
-      // Temporary
-      brandsSelected.forEach((brandSelected) => {
-        fetch(`http://localhost:8080/brands/${brandSelected.id}`, {
-          method: "delete",
-        });
-      });
-    }
-  }, [brandsSelected]);
 
   useEffect(() => {
     fetch("http://localhost:8080/brands")
@@ -74,14 +70,6 @@ const ListBrandTable = () => {
           justifyContent: "flex-end",
         }}
       >
-        <CustomButton
-          type="reset"
-          color="secondary"
-          label="Excluir"
-          data-testid="brand-list-delete-button"
-          className={classes.deleteButton}
-          onClick={handleDeleteBrand}
-        />
         <Link
           to={{
             pathname: "/marcas/cadastro",
