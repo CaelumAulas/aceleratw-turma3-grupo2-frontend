@@ -10,8 +10,12 @@ const ListBrandTable = () => {
   const classes = brandStyles();
   const [brands, setBrands] = useState([]);
   const [brandsSelected, setBrandsSelected] = useState([]);
+  const brandsSelectedQuantity = brandsSelected.length;
+
   const options = useMemo(
     () => ({
+      download: false,
+      print: false,
       filterType: "checkbox",
       onRowSelectionChange: (_, allRowsSelected) => {
         const currentBrandSelected = allRowsSelected.reduce(
@@ -35,6 +39,7 @@ const ListBrandTable = () => {
 
   const handleDeleteBrand = useCallback(() => {
     if (brandsSelected?.length) {
+      // Temporary
       brandsSelected.forEach((brandSelected) => {
         fetch(`http://localhost:8080/brands/${brandSelected.id}`, {
           method: "delete",
@@ -77,12 +82,21 @@ const ListBrandTable = () => {
           className={classes.deleteButton}
           onClick={handleDeleteBrand}
         />
-        <CustomButton
-          variant="contained"
-          label="Alterar"
-          data-testid="brand-list-update-button"
-          className={classes.updateButton}
-        />
+        <Link
+          to={{
+            pathname: "/marcas/cadastro",
+            state: brandsSelected[0],
+          }}
+          style={{ marginRight: "10px" }}
+          data-testid="brand-list-add-button"
+          className={`custom-link confirm-link ${
+            brandsSelectedQuantity > 1 || brandsSelectedQuantity === 0
+              ? "disabled"
+              : ""
+          }`}
+        >
+          Alterar
+        </Link>
         <Link
           to="/marcas/cadastro"
           data-testid="brand-list-add-button"

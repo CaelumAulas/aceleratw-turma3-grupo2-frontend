@@ -43,6 +43,11 @@
   background-color: #c51162;
 }
 
+.disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
 @media (min-width: 1280px) {
   #root {
     height: 100vh;

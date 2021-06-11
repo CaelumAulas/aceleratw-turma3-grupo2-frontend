@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import {
   AppBar,
@@ -16,17 +15,18 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
+import PropTypes from "prop-types";
 
 const drawerWidth = 240;
 
 const items = [
   {
     text: "Entrar",
-    route: "/",
+    route: "/login",
   },
   {
     text: "Dashboard",
-    route: "inicio",
+    route: "/",
   },
   {
     text: "Veículos",
@@ -150,6 +150,10 @@ const PageHeader = (props) => {
       </main>
     </div>
   );
+};
+
+PageHeader.propTypes = {
+  children: PropTypes.element.isRequired,
 };
 
 export default PageHeader;
