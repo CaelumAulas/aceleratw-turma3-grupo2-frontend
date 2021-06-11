@@ -1,13 +1,12 @@
-import React from "react"
-import VehicleForm from "fragments/Vehicle/VehicleForm"
+import React from "react";
+import VehicleForm from "fragments/Vehicle/VehicleForm";
 import { ContainerFullHeight } from "components/ContainerFullHeight/ContainerFullHeight";
 
-
 const VehicleRegistration = () => {
-    return(
-        <ContainerFullHeight>
-            <VehicleForm/>
-        </ContainerFullHeight>
-    );
+  return (
+    <ContainerFullHeight>
+      <VehicleForm />
+    </ContainerFullHeight>
+  );
 };
-export default VehicleRegistration; 
+export default VehicleRegistration;
