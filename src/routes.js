@@ -11,28 +11,31 @@ import ListBrand from "screens/Brand/ListBrand";
 import VehicleRegistration from "screens/Vehicle/VehicleRegistration";
 import ListVehicle from "screens/Vehicle/ListVehicle";
 import PageHeader from "components/PageHeader/PageHeader";
+import ConfirmProvider from "components/Confirmation/ConfirmProvider";
 // import PrivateRoute from "components/PrivateRoute/PrivateRoute";
 
 export default function Routes() {
   return (
     <BrowserRouter>
-      <PageHeader>
-        <Switch>
-          {/* <PrivateRoute path="/inicio" component={Dashboard} /> */}
-          <Route exact path="/" component={Dashboard} />
-          <Route path="/login" exact component={Login} />
-          <Route path="usuarios/cadastro" component={UserRegistration} />
-          <Route path="/usuarios" component={ListUsers} />
-          <Route path="/marcas/cadastro" component={BrandRegistration} />
-          <Route path="/marcas" component={ListBrand} />
-          <Route path="/veiculos/cadastro" component={VehicleRegistration} />
-          <Route path="/veiculos" component={ListVehicle} />
-          <Route path="/recuperar-senha" component={UserForgotPassword} />
-          <Route>
-            <PageNotFound />
-          </Route>
-        </Switch>
-      </PageHeader>
+      <ConfirmProvider>
+        <PageHeader>
+          <Switch>
+            {/* <PrivateRoute path="/inicio" component={Dashboard} /> */}
+            <Route exact path="/" component={Dashboard} />
+            <Route path="/login" exact component={Login} />
+            <Route path="usuarios/cadastro" component={UserRegistration} />
+            <Route path="/usuarios" component={ListUsers} />
+            <Route path="/marcas/cadastro" component={BrandRegistration} />
+            <Route path="/marcas" component={ListBrand} />
+            <Route path="/veiculos/cadastro" component={VehicleRegistration} />
+            <Route path="/veiculos" component={ListVehicle} />
+            <Route path="/recuperar-senha" component={UserForgotPassword} />
+            <Route>
+              <PageNotFound />
+            </Route>
+          </Switch>
+        </PageHeader>
+      </ConfirmProvider>
     </BrowserRouter>
   );
 }
