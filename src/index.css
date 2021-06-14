@@ -2,52 +2,6 @@
   font-family: Roboto, sans-serif;
 }
 
-.custom-link {
-  padding: 6px 16px;
-  font-size: 0.875rem;
-  min-width: 64px;
-  box-sizing: border-box;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-weight: 500;
-  line-height: 1.75;
-  border-radius: 4px;
-  letter-spacing: 0.02857em;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.custom-link:hover {
-  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
-    0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-}
-
-.confirm-link {
-  color: #fff;
-  background-color: #3f51b5;
-}
-
-.confirm-link:hover {
-  background-color: #303f9f;
-}
-
-.cancel-link {
-  color: #fff;
-  background-color: #f50057;
-}
-
-.cancel-link:hover {
-  background-color: #c51162;
-}
-
-.disabled {
-  pointer-events: none;
-  opacity: 0.3;
-}
-
 @media (min-width: 1280px) {
   #root {
     height: 100vh;

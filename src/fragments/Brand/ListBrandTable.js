@@ -101,7 +101,6 @@ const ListBrandTable = () => {
           label="Incluir"
           onClick={() => history.push("/marcas/cadastro")}
           data-testid="brand-list-add-button"
-          className="custom-link confirm-link"
         />
       </div>
     </>
