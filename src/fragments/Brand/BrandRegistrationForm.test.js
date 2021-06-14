@@ -2,6 +2,19 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import BrandRegistrationForm from "./BrandRegistrationForm";
 
+jest.mock("react-router-dom", () => ({
+  useLocation: jest.fn().mockReturnValue({
+    pathname: "/marcas/cadastro",
+    search: "",
+    hash: "",
+    state: undefined,
+    key: "5nvxpbdafa",
+  }),
+  useHistory: jest.fn().mockReturnValue({
+    push: jest.fn(),
+  }),
+}));
+
 describe("<BrandRegistrationForm />", () => {
   it("should render an input to insert brand value", async () => {
     render(<BrandRegistrationForm />);

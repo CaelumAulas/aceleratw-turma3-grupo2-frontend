@@ -1,10 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useHistory } from "react-router-dom";
 import MUIDataTable from "mui-datatables";
-import { Link } from "react-router-dom";
+import CustomButton from "components/CustomButton/CustomButton";
+import brandStyles from "./styles";
 
 const columns = ["Nome"];
 
 const ListBrandTable = () => {
+  const classes = brandStyles();
+  const history = useHistory();
   const [brands, setBrands] = useState([]);
   const [brandsSelected, setBrandsSelected] = useState([]);
   const brandsSelectedQuantity = brandsSelected.length;
@@ -47,7 +51,10 @@ const ListBrandTable = () => {
   useEffect(() => {
     fetch("http://localhost:8080/brands")
       .then((data) => data.json())
-      .then((response) => setBrands(response.content));
+      .then((response) => setBrands(response.content))
+      .catch((error) => console.error(error));
+
+    return () => false;
   }, []);
 
   const brandsName = useMemo(
@@ -70,28 +77,32 @@ const ListBrandTable = () => {
           justifyContent: "flex-end",
         }}
       >
-        <Link
-          to={{
-            pathname: "/marcas/cadastro",
-            state: brandsSelected[0],
-          }}
-          style={{ marginRight: "10px" }}
-          data-testid="brand-list-add-button"
-          className={`custom-link confirm-link ${
-            brandsSelectedQuantity > 1 || brandsSelectedQuantity === 0
-              ? "disabled"
-              : ""
-          }`}
-        >
-          Alterar
-        </Link>
-        <Link
-          to="/marcas/cadastro"
+        <CustomButton
+          variant="contained"
+          color="primary"
+          label="Alterar"
+          className={classes.updateButton}
+          onClick={() => history.push("/marcas/cadastro", brandsSelected[0])}
+          disabled={
+            !!(brandsSelectedQuantity > 1 || brandsSelectedQuantity === 0)
+          }
+          data-testid="brand-list-update-button"
+        />
+        <CustomButton
+          type="reset"
+          color="secondary"
+          label="Excluir"
+          className={classes.deleteButton}
+          data-testid="brand-list-delete-button"
+        />
+        <CustomButton
+          variant="contained"
+          color="primary"
+          label="Incluir"
+          onClick={() => history.push("/marcas/cadastro")}
           data-testid="brand-list-add-button"
           className="custom-link confirm-link"
-        >
-          Incluir
-        </Link>
+        />
       </div>
     </>
   );

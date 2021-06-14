@@ -3,10 +3,11 @@ import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
 import TextInput from "components/TextInput/TextInput";
 import CustomButton from "components/CustomButton/CustomButton";
 import brandStyles from "./styles";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 const BrandRegistrationForm = () => {
-  const { state: routeState } = useLocation();
+  const routeState = useLocation()?.state;
+  const history = useHistory();
   const classes = brandStyles();
   const [brandValue, setBrandValue] = useState("");
 
@@ -56,13 +57,17 @@ const BrandRegistrationForm = () => {
         <div style={{ display: "flex" }}>
           <CustomButton
             type="submit"
-            label="Cadastrar"
+            label="Salvar"
             className={classes.submitButton}
             data-testid="register-brand-button"
           />
-          <Link to="/marcas" className="custom-link cancel-link">
-            Cancelar
-          </Link>
+          <CustomButton
+            type="reset"
+            color="secondary"
+            label="Cancelar"
+            onClick={() => history.push("/marcas")}
+            className={classes.deleteButton}
+          />
         </div>
       </form>
     </GridFullHeight>
