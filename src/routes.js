@@ -20,7 +20,7 @@ export default function Routes() {
       <ConfirmProvider>
         <PageHeader>
           <Switch>
-            {/* <PrivateRoute path="/inicio" component={Dashboard} /> */}
+            {/* <PrivateRoute exact path="/" component={Dashboard} /> */}
             <Route exact path="/" component={Dashboard} />
             <Route path="/login" exact component={Login} />
             <Route path="usuarios/cadastro" component={UserRegistration} />
