@@ -52,14 +52,11 @@ const VehicleForm = () => {
             handleVehicleFormSubmit();
           }}
         >
-          <FormControl data-testid="select-brand" variant="filled" fullWidth>
-            <InputLabel required variant="filled" id="selectMarca">
+          <FormControl data-testid="select-brand" variant="outlined" fullWidth>
+            <InputLabel required id="selectMarca">
               Selecione uma marca
             </InputLabel>
-            <Select
-              defaultValue=""
-              onChange={(e) => setBrandValue(e.target.value)}
-            >
+            <Select onChange={(e) => setBrandValue(e.target.value)}>
               {brandData.map((brand) => {
                 return (
                   <MenuItem key={brand.name} value={brand.name}>
@@ -103,7 +100,7 @@ const VehicleForm = () => {
             />
             <CustomButton
               type="submit"
-              label="Cadastrar"
+              label="Salvar"
               className={classes.submitButton}
             />
           </div>

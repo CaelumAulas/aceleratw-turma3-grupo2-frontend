@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import CustomButton from "components/CustomButton/CustomButton";
 import MUIDataTable from "mui-datatables";
 import vehicleStyles from "./styles";
 import { useHistory } from "react-router-dom";
+import useConfirm from "../../hooks/useConfirm";
 
 const columns = ["Marca", "Modelo", "Ano", "Valor"];
 
@@ -11,6 +12,7 @@ const ListVehicleTable = () => {
   const classes = vehicleStyles();
   const [vehicles, setVehicles] = useState([]);
   const [vehiclesSelected, setVehiclesSelected] = useState([]);
+  const confirm = useConfirm();
 
   const options = useMemo(
     () => ({
@@ -39,7 +41,7 @@ const ListVehicleTable = () => {
         },
         selectedRows: {
           text: "registro(s) selecionados",
-          delete: "Excluir",
+          delete: false,
           deleteAria: "Excluir registros selecionados",
         },
         pagination: {
@@ -48,15 +50,6 @@ const ListVehicleTable = () => {
           rowsPerPage: "Registros por página:",
           displayRows: "de",
         },
-      },
-      onRowsDelete: () => {
-        if (vehiclesSelected?.length) {
-          vehiclesSelected.forEach((vehiclesSelected) => {
-            fetch(`http://localhost:8080/vehicle/${vehiclesSelected.id}`, {
-              method: "delete",
-            });
-          });
-        }
       },
       onRowSelectionChange: (_, allRowsSelected) => {
         const currentBrandSelected = allRowsSelected.reduce(
@@ -74,14 +67,34 @@ const ListVehicleTable = () => {
         setVehiclesSelected(currentBrandSelected);
       },
     }),
-    [vehicles, vehiclesSelected]
+    [vehicles]
   );
+
+  const handleDeleteVehicle = useCallback(() => {
+    confirm({
+      description: `O(s) veículo(s) será(ão) excluído(s)`,
+    }).then(() => {
+      if (vehiclesSelected?.length) {
+        vehiclesSelected.forEach((vehiclesSelected) => {
+          fetch(`http://localhost:8080/vehicle/${vehiclesSelected.id}`, {
+            method: "delete",
+          }).then(() => {
+            // Verify refresh table
+            fetch("http://localhost:8080/vehicle")
+              .then((data) => data.json())
+              .then((response) => {
+                setVehicles(response.content);
+              });
+          });
+        });
+      }
+    });
+  }, [vehiclesSelected, confirm]);
 
   useEffect(() => {
     fetch("http://localhost:8080/vehicle")
       .then((data) => data.json())
       .then((response) => {
-        console.log(response);
         setVehicles(response.content);
       });
   }, []);
@@ -116,6 +129,13 @@ const ListVehicleTable = () => {
           justifyContent: "flex-end",
         }}
       >
+        <CustomButton
+          color="secondary"
+          variant="contained"
+          label="Excluir"
+          className={classes.deleteButton}
+          onClick={handleDeleteVehicle}
+        />
         <CustomButton
           variant="contained"
           label="Alterar"
