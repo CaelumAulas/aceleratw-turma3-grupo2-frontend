@@ -2,11 +2,12 @@ import React, { useEffect, useState, useMemo } from "react";
 import CustomButton from "components/CustomButton/CustomButton";
 import MUIDataTable from "mui-datatables";
 import vehicleStyles from "./styles";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const columns = ["Marca", "Modelo", "Ano", "Valor"];
 
 const ListVehicleTable = () => {
+  const history = useHistory();
   const classes = vehicleStyles();
   const [vehicles, setVehicles] = useState([]);
   const [vehiclesSelected, setVehiclesSelected] = useState([]);
@@ -116,21 +117,22 @@ const ListVehicleTable = () => {
         }}
       >
         <CustomButton
-          component={Link}
           variant="contained"
           label="Alterar"
           style={{ marginRight: "10px" }}
-          to={{
-            pathname: `/veiculos/cadastro/`,
-            state: vehiclesSelected[0],
-          }}
           className={classes.updateButton}
+          onClick={() =>
+            history.push({
+              pathname: "/veiculos/cadastro/",
+              state: vehiclesSelected[0],
+            })
+          }
         />
         <CustomButton
           to="/veiculos/cadastro"
-          component={Link}
           type="submit"
           label="Incluir"
+          onClick={() => history.push("/veiculos/cadastro")}
           className={classes.submitButton}
         />
       </div>

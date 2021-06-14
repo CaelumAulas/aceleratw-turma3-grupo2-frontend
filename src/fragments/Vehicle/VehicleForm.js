@@ -7,10 +7,9 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import vehicleStyles from "./styles";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const VehicleForm = () => {
-  const { state: routeState } = useLocation();
   const history = useHistory();
   const classes = vehicleStyles();
 
@@ -27,17 +26,8 @@ const VehicleForm = () => {
   }, []);
 
   const handleVehicleFormSubmit = useCallback(() => {
-    const { url, method } = routeState
-      ? {
-          url: `http://localhost:8080/vehicle/${routeState.id}`,
-          method: "put",
-        }
-      : {
-          url: "http://localhost:8080/vehicle",
-          method: "post",
-        };
-    fetch(url, {
-      method,
+    fetch("http://localhost:8080/vehicle", {
+      method: "post",
       headers: {
         Accept: "application/vnd.vtex.ds.v10+json",
         "Content-Type": "application/json",
@@ -46,12 +36,12 @@ const VehicleForm = () => {
         nameBrand: brandValue,
         model: modelValue,
         years: yearValue,
-        price: priceValue,
+        price: priceValue.replace(",", "."),
       }),
     }).then((response) => {
       history.push("/veiculos");
     });
-  }, [brandValue, modelValue, yearValue, priceValue, routeState, history]);
+  }, [brandValue, modelValue, yearValue, priceValue, history]);
 
   return (
     <>
@@ -62,7 +52,7 @@ const VehicleForm = () => {
             handleVehicleFormSubmit();
           }}
         >
-          <FormControl variant="filled" fullWidth>
+          <FormControl data-testid="select-brand" variant="filled" fullWidth>
             <InputLabel required variant="filled" id="selectMarca">
               Selecione uma marca
             </InputLabel>
@@ -104,16 +94,17 @@ const VehicleForm = () => {
 
           <div style={{ display: "flex" }}>
             <CustomButton
-              type="submit"
-              label="Cadastrar"
-              className={classes.submitButton}
-            />
-            <CustomButton
+              style={{ marginRight: "10px" }}
               to="/veiculos"
-              component={Link}
+              onClick={() => history.push("/veiculos")}
               type="reset"
               color="secondary"
               label="Cancelar"
+            />
+            <CustomButton
+              type="submit"
+              label="Cadastrar"
+              className={classes.submitButton}
             />
           </div>
         </form>
