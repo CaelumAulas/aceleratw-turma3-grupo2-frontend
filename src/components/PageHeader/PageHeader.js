@@ -30,15 +30,15 @@ const items = [
   },
   {
     text: "Veículos",
-    route: "veiculos",
+    route: "/veiculos",
   },
   {
     text: "Marcas",
-    route: "marcas",
+    route: "/marcas",
   },
   {
     text: "Usuários",
-    route: "usuarios",
+    route: "/usuarios",
   },
 ];
 

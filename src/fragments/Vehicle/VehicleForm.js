@@ -12,7 +12,6 @@ import { useHistory } from "react-router-dom";
 const VehicleForm = () => {
   const history = useHistory();
   const classes = vehicleStyles();
-
   const [brandData, setBrandData] = useState([]);
   const [brandValue, setBrandValue] = useState("");
   const [modelValue, setModelValue] = useState("");
@@ -38,7 +37,7 @@ const VehicleForm = () => {
         years: yearValue,
         price: priceValue.replace(",", "."),
       }),
-    }).then((response) => {
+    }).then(() => {
       history.push("/veiculos");
     });
   }, [brandValue, modelValue, yearValue, priceValue, history]);

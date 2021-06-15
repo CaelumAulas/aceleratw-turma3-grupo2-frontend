@@ -95,21 +95,21 @@ const ListVehicleTable = () => {
     fetch("http://localhost:8080/vehicle")
       .then((data) => data.json())
       .then((response) => {
-        setVehicles(response.content);
+        if (response?.content?.length) {
+          setVehicles(response.content);
+        }
       });
   }, []);
 
   const vehiclesData = useMemo(
     () =>
-      vehicles.map((vehicle) => {
-        return {
-          Id: vehicle.idVehicle,
-          Marca: vehicle.brand,
-          Modelo: vehicle.model,
-          Ano: vehicle.years,
-          Valor: vehicle.price,
-        };
-      }),
+      vehicles.map((vehicle) => ({
+        Id: vehicle.idVehicle,
+        Marca: vehicle.brand,
+        Modelo: vehicle.model,
+        Ano: vehicle.years,
+        Valor: vehicle.price,
+      })),
     [vehicles]
   );
 

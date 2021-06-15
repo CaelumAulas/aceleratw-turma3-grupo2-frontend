@@ -51,7 +51,11 @@ const ListBrandTable = () => {
   useEffect(() => {
     fetch("http://localhost:8080/brands")
       .then((data) => data.json())
-      .then((response) => setBrands(response.content))
+      .then((response) => {
+        if (response?.content?.length) {
+          setBrands(response.content);
+        }
+      })
       .catch((error) => console.error(error));
 
     return () => false;

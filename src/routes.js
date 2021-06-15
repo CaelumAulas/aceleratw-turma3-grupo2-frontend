@@ -23,7 +23,7 @@ export default function Routes() {
             {/* <PrivateRoute exact path="/" component={Dashboard} /> */}
             <Route exact path="/" component={Dashboard} />
             <Route path="/login" exact component={Login} />
-            <Route path="usuarios/cadastro" component={UserRegistration} />
+            <Route path="/usuarios/cadastro" component={UserRegistration} />
             <Route path="/usuarios" component={ListUsers} />
             <Route path="/marcas/cadastro" component={BrandRegistration} />
             <Route path="/marcas" component={ListBrand} />
