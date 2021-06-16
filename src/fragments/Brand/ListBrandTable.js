@@ -4,9 +4,12 @@ import MUIDataTable from "mui-datatables";
 import CustomButton from "components/CustomButton/CustomButton";
 import brandStyles from "./styles";
 
+import useLoadingContext from "hooks/useLoadingContext";
+
 const columns = ["Nome"];
 
 const ListBrandTable = () => {
+  const { setLoading } = useLoadingContext();
   const classes = brandStyles();
   const history = useHistory();
   const [brands, setBrands] = useState([]);
@@ -49,17 +52,19 @@ const ListBrandTable = () => {
   );
 
   useEffect(() => {
+    setLoading(true);
     fetch("http://localhost:8080/brands")
       .then((data) => data.json())
       .then((response) => {
         if (response?.content?.length) {
           setBrands(response.content);
+          setLoading(false);
         }
       })
       .catch((error) => console.error(error));
 
     return () => false;
-  }, []);
+  }, [setLoading]);
 
   const brandsName = useMemo(
     () => brands.map((brand) => [brand.name]),

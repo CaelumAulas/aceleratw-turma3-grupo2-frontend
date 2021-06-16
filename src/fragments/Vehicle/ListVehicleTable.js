@@ -3,7 +3,8 @@ import CustomButton from "components/CustomButton/CustomButton";
 import MUIDataTable from "mui-datatables";
 import vehicleStyles from "./styles";
 import { useHistory } from "react-router-dom";
-import useConfirm from "../../hooks/useConfirm";
+import useConfirm from "hooks/useConfirm";
+import useLoadingContext from "hooks/useLoadingContext";
 
 const columns = ["Marca", "Modelo", "Ano", "Valor"];
 
@@ -13,6 +14,7 @@ const ListVehicleTable = () => {
   const [vehicles, setVehicles] = useState([]);
   const [vehiclesSelected, setVehiclesSelected] = useState([]);
   const confirm = useConfirm();
+  const { setLoading } = useLoadingContext();
 
   const options = useMemo(
     () => ({
@@ -92,14 +94,16 @@ const ListVehicleTable = () => {
   }, [vehiclesSelected, confirm]);
 
   useEffect(() => {
+    setLoading(true);
     fetch("http://localhost:8080/vehicle")
       .then((data) => data.json())
       .then((response) => {
         if (response?.content?.length) {
           setVehicles(response.content);
+          setLoading(false);
         }
       });
-  }, []);
+  }, [setLoading]);
 
   const vehiclesData = useMemo(
     () =>

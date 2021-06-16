@@ -8,10 +8,12 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import vehicleStyles from "./styles";
 import { useHistory } from "react-router-dom";
+import useLoadingContext from "hooks/useLoadingContext";
 
 const VehicleForm = () => {
   const history = useHistory();
   const classes = vehicleStyles();
+  const { setLoading } = useLoadingContext();
   const [brandData, setBrandData] = useState([]);
   const [brandValue, setBrandValue] = useState("");
   const [modelValue, setModelValue] = useState("");
@@ -19,12 +21,19 @@ const VehicleForm = () => {
   const [priceValue, setPriceValue] = useState("");
 
   useEffect(() => {
+    setLoading(true);
     fetch("http://localhost:8080/brands")
       .then((data) => data.json())
-      .then((response) => setBrandData(response.content));
-  }, []);
+      .then((response) => {
+        if (response?.content?.length) {
+          setBrandData(response.content);
+          setLoading(false);
+        }
+      });
+  }, [setLoading]);
 
   const handleVehicleFormSubmit = useCallback(() => {
+    setLoading(true);
     fetch("http://localhost:8080/vehicle", {
       method: "post",
       headers: {
@@ -38,9 +47,10 @@ const VehicleForm = () => {
         price: priceValue.replace(",", "."),
       }),
     }).then(() => {
+      setLoading(false);
       history.push("/veiculos");
     });
-  }, [brandValue, modelValue, yearValue, priceValue, history]);
+  }, [setLoading, brandValue, modelValue, yearValue, priceValue, history]);
 
   return (
     <>
