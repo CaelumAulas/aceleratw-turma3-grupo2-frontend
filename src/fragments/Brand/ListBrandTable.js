@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 import MUIDataTable from "mui-datatables";
 import CustomButton from "components/CustomButton/CustomButton";
 import brandStyles from "./styles";
+import useConfirm from "hooks/useConfirm";
 
 import useLoadingContext from "hooks/useLoadingContext";
 
@@ -15,22 +16,14 @@ const ListBrandTable = () => {
   const [brands, setBrands] = useState([]);
   const [brandsSelected, setBrandsSelected] = useState([]);
   const brandsSelectedQuantity = brandsSelected.length;
+  const confirm = useConfirm();
 
   const options = useMemo(
     () => ({
       download: false,
       print: false,
       filterType: "checkbox",
-      onRowsDelete: () => {
-        if (brandsSelected?.length) {
-          // Temporary
-          brandsSelected.forEach((brandSelected) => {
-            fetch(`http://localhost:8080/brands/${brandSelected.id}`, {
-              method: "delete",
-            });
-          });
-        }
-      },
+      onRowsDelete: () => false,
       onRowSelectionChange: (_, allRowsSelected) => {
         const currentBrandSelected = allRowsSelected.reduce(
           (acc, rowSelected) => {
@@ -48,8 +41,31 @@ const ListBrandTable = () => {
         setBrandsSelected(currentBrandSelected);
       },
     }),
-    [brands, brandsSelected]
+    [brands]
   );
+
+  const handleBrandDelete = useCallback(() => {
+    confirm({
+      description: `A(s) marca(s) será(ão) excluído(s)`,
+    }).then(() => {
+      if (brandsSelected?.length) {
+        // Temporary
+        brandsSelected.forEach((brandSelected) => {
+          fetch(`http://localhost:8080/brands/${brandSelected.id}`, {
+            method: "delete",
+          }).then(() => {
+            fetch("http://localhost:8080/brands")
+              .then((data) => data.json())
+              .then((response) => {
+                if (response?.content?.length) {
+                  setBrands(response.content);
+                }
+              });
+          });
+        });
+      }
+    });
+  }, [confirm, brandsSelected]);
 
   useEffect(() => {
     setLoading(true);
@@ -99,9 +115,10 @@ const ListBrandTable = () => {
         />
         <CustomButton
           type="reset"
+          className={classes.deleteButton}
           color="secondary"
           label="Excluir"
-          className={classes.deleteButton}
+          onClick={handleBrandDelete}
           data-testid="brand-list-delete-button"
         />
         <CustomButton
