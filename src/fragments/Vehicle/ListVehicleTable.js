@@ -139,43 +139,45 @@ const ListVehicleTable = () => {
         options={options}
       />
 
-      <div
-        style={{
-          display: "flex",
-          marginTop: "10px",
-          justifyContent: "flex-end",
-        }}
-      >
-        <CustomButton
-          color="secondary"
-          variant="contained"
-          label="Excluir"
-          className={classes.deleteButton}
-          onClick={handleDeleteVehicle}
-        />
-        <CustomButton
-          variant="contained"
-          label="Alterar"
-          style={{ marginRight: "10px" }}
-          className={classes.updateButton}
-          disabled={
-            !!(vehiclesSelectedQuantity > 1 || vehiclesSelectedQuantity === 0)
-          }
-          onClick={() =>
-            history.push({
-              pathname: "/veiculos/cadastro/",
-              state: vehiclesSelected[0],
-            })
-          }
-        />
-        <CustomButton
-          to="/veiculos/cadastro"
-          type="submit"
-          label="Incluir"
-          onClick={() => history.push("/veiculos/cadastro")}
-          className={classes.submitButton}
-        />
-      </div>
+      {userLogged.token && (
+        <div
+          style={{
+            display: "flex",
+            marginTop: "10px",
+            justifyContent: "flex-end",
+          }}
+        >
+          <CustomButton
+            color="secondary"
+            variant="contained"
+            label="Excluir"
+            className={classes.deleteButton}
+            onClick={handleDeleteVehicle}
+          />
+          <CustomButton
+            variant="contained"
+            label="Alterar"
+            style={{ marginRight: "10px" }}
+            className={classes.updateButton}
+            disabled={
+              !!(vehiclesSelectedQuantity > 1 || vehiclesSelectedQuantity === 0)
+            }
+            onClick={() =>
+              history.push({
+                pathname: "/veiculos/cadastro/",
+                state: vehiclesSelected[0],
+              })
+            }
+          />
+          <CustomButton
+            to="/veiculos/cadastro"
+            type="submit"
+            label="Incluir"
+            onClick={() => history.push("/veiculos/cadastro")}
+            className={classes.submitButton}
+          />
+        </div>
+      )}
     </>
   );
 };
