@@ -1,10 +1,15 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import ListUserTable from "./ListUserTable";
+import LoadingProvider from "contexts/LoadingContext";
 
 describe("<ListUserTable />", () => {
   it("should render an delete button", async () => {
-    render(<ListUserTable />);
+    render(
+      <LoadingProvider>
+        <ListUserTable />
+      </LoadingProvider>
+    );
     const brandListDeleteButton = await screen.findByTestId(
       "user-list-delete-button"
     );
@@ -13,7 +18,11 @@ describe("<ListUserTable />", () => {
   });
 
   it("should render an update button", async () => {
-    render(<ListUserTable />);
+    render(
+      <LoadingProvider>
+        <ListUserTable />
+      </LoadingProvider>
+    );
     const brandListDeleteButton = await screen.findByTestId(
       "user-list-update-button"
     );
@@ -22,7 +31,11 @@ describe("<ListUserTable />", () => {
   });
 
   it("should render an add button", async () => {
-    render(<ListUserTable />);
+    render(
+      <LoadingProvider>
+        <ListUserTable />
+      </LoadingProvider>
+    );
     const brandListDeleteButton = await screen.findByTestId(
       "user-list-add-button"
     );
