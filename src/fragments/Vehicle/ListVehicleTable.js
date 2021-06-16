@@ -13,6 +13,7 @@ const ListVehicleTable = () => {
   const [vehicles, setVehicles] = useState([]);
   const [vehiclesSelected, setVehiclesSelected] = useState([]);
   const confirm = useConfirm();
+  const vehiclesSelectedQuantity = vehiclesSelected.length;
 
   const options = useMemo(
     () => ({
@@ -58,6 +59,11 @@ const ListVehicleTable = () => {
               ...acc,
               {
                 id: vehicles[rowSelected.index].idVehicle,
+                brand: vehicles[rowSelected.index].brand,
+                brandId: vehicles[rowSelected.index].brandId,
+                model: vehicles[rowSelected.index].model,
+                year: vehicles[rowSelected.index].years,
+                price: vehicles[rowSelected.index].price,
               },
             ];
             return acc;
@@ -141,6 +147,9 @@ const ListVehicleTable = () => {
           label="Alterar"
           style={{ marginRight: "10px" }}
           className={classes.updateButton}
+          disabled={
+            !!(vehiclesSelectedQuantity > 1 || vehiclesSelectedQuantity === 0)
+          }
           onClick={() =>
             history.push({
               pathname: "/veiculos/cadastro/",
