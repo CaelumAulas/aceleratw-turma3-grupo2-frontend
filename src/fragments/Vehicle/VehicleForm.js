@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import CustomButton from "components/CustomButton/CustomButton";
 import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
 import TextInput from "components/TextInput/TextInput";
@@ -8,6 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import vehicleStyles from "./styles";
 import { useHistory, useLocation } from "react-router-dom";
+import UserLogged from "contexts/UserLogged";
 
 const VehicleForm = () => {
   const routeState = useLocation()?.state;
@@ -19,9 +20,16 @@ const VehicleForm = () => {
   const [modelValue, setModelValue] = useState("");
   const [yearValue, setYearValue] = useState("");
   const [priceValue, setPriceValue] = useState("");
+  const userLogged = useContext(UserLogged);
 
   useEffect(() => {
-    fetch("http://localhost:8080/brands")
+    fetch("http://localhost:8080/brands", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + userLogged.token,
+      },
+    })
       .then((data) => data.json())
       .then((response) => {
         setBrandData(response.content);
@@ -50,7 +58,6 @@ const VehicleForm = () => {
             method: "post",
           };
 
-      console.log(url);
       fetch(url, {
         method,
         headers: {

@@ -22,7 +22,7 @@ const drawerWidth = 240;
 const items = [
   {
     text: "Entrar",
-    route: "/",
+    route: "/login",
   },
   {
     text: "Dashboard",
