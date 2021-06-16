@@ -1,14 +1,22 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  useContext,
+} from "react";
 import CustomButton from "components/CustomButton/CustomButton";
 import MUIDataTable from "mui-datatables";
 import vehicleStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import useConfirm from "../../hooks/useConfirm";
+import UserLoggedContext from "contexts/UserLoggedContext";
 
 const columns = ["Marca", "Modelo", "Ano", "Valor"];
 
 const ListVehicleTable = () => {
   const history = useHistory();
+  const userLogged = useContext(UserLoggedContext);
   const classes = vehicleStyles();
   const [vehicles, setVehicles] = useState([]);
   const [vehiclesSelected, setVehiclesSelected] = useState([]);
@@ -84,6 +92,9 @@ const ListVehicleTable = () => {
         vehiclesSelected.forEach((vehiclesSelected) => {
           fetch(`http://localhost:8080/vehicle/${vehiclesSelected.id}`, {
             method: "delete",
+            headers: {
+              Authorization: "Bearer " + userLogged.token,
+            },
           }).then(() => {
             // Verify refresh table
             fetch("http://localhost:8080/vehicle")

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import CustomButton from "components/CustomButton/CustomButton";
 import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
 import TextInput from "components/TextInput/TextInput";
@@ -8,19 +8,25 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import vehicleStyles from "./styles";
 import { useHistory, useLocation } from "react-router-dom";
-import UserLogged from "contexts/UserLogged";
+import UserLoggedContext from "contexts/UserLoggedContext";
+import useFormValidators from "hooks/useFormValidators";
+import VehicleFormContext from "contexts/VehicleFormContext";
 
 const VehicleForm = () => {
-  const routeState = useLocation()?.state;
   const history = useHistory();
   const classes = vehicleStyles();
+  const routeState = useLocation()?.state;
+  const [formData, setFormData] = useState({
+    brand: "",
+    model: "",
+    year: "",
+    price: "0",
+  });
 
   const [brandData, setBrandData] = useState([]);
-  const [brandValue, setBrandValue] = useState("");
-  const [modelValue, setModelValue] = useState("");
-  const [yearValue, setYearValue] = useState("");
-  const [priceValue, setPriceValue] = useState("");
-  const userLogged = useContext(UserLogged);
+  const userLogged = useContext(UserLoggedContext);
+  const formValidations = useContext(VehicleFormContext);
+  const [isFormValid] = useFormValidators(formValidations);
 
   useEffect(() => {
     fetch("http://localhost:8080/brands", {
@@ -35,19 +41,23 @@ const VehicleForm = () => {
         setBrandData(response.content);
       });
 
-    setBrandValue(routeState?.brand ?? "");
-    setModelValue(routeState?.model ?? "");
-    setYearValue(routeState?.year ?? "");
-    setPriceValue(routeState?.price ?? "");
-  }, [routeState]);
+    setFormData({
+      brand: routeState?.brand ?? "",
+      model: routeState?.model ?? "",
+      year: routeState?.year ?? "",
+      price: routeState?.price ?? "",
+    });
+  }, [routeState, userLogged]);
 
-  const handleVehicleFormSubmit = useCallback(() => {
-    if (
-      brandValue !== "" &&
-      modelValue !== "" &&
-      yearValue !== "" &&
-      priceValue !== ""
-    ) {
+  function updateField(field) {
+    setFormData({
+      ...formData,
+      ...field,
+    });
+  }
+
+  async function handleVehicleFormSubmit() {
+    if (isFormValid) {
       const { url, method } = routeState
         ? {
             url: `http://localhost:8080/vehicle/${routeState.id}`,
@@ -62,19 +72,20 @@ const VehicleForm = () => {
         method,
         headers: {
           Accept: "application/vnd.vtex.ds.v10+json",
+          Authorization: "Bearer " + userLogged.token,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          nameBrand: brandValue,
-          model: modelValue,
-          years: yearValue,
-          price: priceValue.toString().replace(",", "."),
+          nameBrand: formData.brand,
+          model: formData.model,
+          years: formData.year,
+          price: formData.price.toString().replace(",", "."),
         }),
       }).then(() => {
         history.push("/veiculos");
       });
     }
-  }, [brandValue, modelValue, yearValue, priceValue, history, routeState]);
+  }
 
   return (
     <GridFullHeight container direction="column" alignItems="center">
@@ -89,8 +100,13 @@ const VehicleForm = () => {
             Selecione uma marca
           </InputLabel>
           <Select
-            defaultValue={routeState?.brand ?? ""}
-            onChange={(e) => setBrandValue(e.target.value)}
+            required
+            value={formData.brand}
+            onChange={(e) =>
+              updateField({
+                brand: e.target.value,
+              })
+            }
           >
             {brandData.map((brand) => {
               return (
@@ -103,25 +119,37 @@ const VehicleForm = () => {
         </FormControl>
 
         <TextInput
-          defaultValue={routeState?.model ?? ""}
           id="model"
           label="Modelo"
           required
-          onChange={(e) => setModelValue(e.target.value)}
+          value={formData.model}
+          onChange={(e) =>
+            updateField({
+              model: e.target.value,
+            })
+          }
         />
         <TextInput
-          defaultValue={routeState?.year ?? ""}
           id="year"
           label="Ano"
           required
-          onChange={(e) => setYearValue(e.target.value)}
+          value={formData.year}
+          onChange={(e) =>
+            updateField({
+              year: e.target.value,
+            })
+          }
         />
         <TextInput
-          defaultValue={routeState?.price ?? ""}
           id="value"
           label="Valor"
           required
-          onChange={(e) => setPriceValue(e.target.value)}
+          value={formData.price}
+          onChange={(e) =>
+            updateField({
+              price: e.target.value,
+            })
+          }
         />
 
         <div style={{ display: "flex" }}>

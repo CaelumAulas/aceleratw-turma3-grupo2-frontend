@@ -2,13 +2,14 @@ import React, { useState, useContext } from "react";
 import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
 import TextInput from "components/TextInput/TextInput";
 import CustomButton from "components/CustomButton/CustomButton";
-import { Link } from "react-router-dom";
-import UserLogged from "../../contexts/UserLogged";
+import { Link, useHistory } from "react-router-dom";
+import UserLoggedContext from "../../contexts/UserLoggedContext";
 
 const LoginForm = () => {
+  const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const userLogged = useContext(UserLogged);
+  const userLogged = useContext(UserLoggedContext);
 
   async function handleLogin() {
     await fetch(`http://localhost:8080/auth`, {
@@ -24,6 +25,7 @@ const LoginForm = () => {
       .then((response) => response.json())
       .then((data) => {
         userLogged.token = data.token;
+        history.push("./dashboard");
       });
   }
 

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   AppBar,
   CssBaseline,
@@ -14,33 +14,11 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
+import UserLoggedContext from "../../contexts/UserLoggedContext";
 
 const drawerWidth = 240;
-
-const items = [
-  {
-    text: "Entrar",
-    route: "/login",
-  },
-  {
-    text: "Dashboard",
-    route: "inicio",
-  },
-  {
-    text: "Veículos",
-    route: "veiculos",
-  },
-  {
-    text: "Marcas",
-    route: "marcas",
-  },
-  {
-    text: "Usuários",
-    route: "usuarios",
-  },
-];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,22 +55,62 @@ const useStyles = makeStyles((theme) => ({
 
 const PageHeader = (props) => {
   const classes = useStyles();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const location = useLocation();
+  const userLogged = useContext(UserLoggedContext);
+
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  function getMenuTitle(path) {
+    switch (path) {
+      case "/marcas":
+        return "Marcas";
+      case "./usuarios":
+        return "Usuários";
+      case "./dashboard":
+        return "Dashboard";
+      case "./login":
+        return "Entrar";
+      case "./veiculos":
+        return "Veículos";
+      default:
+        return "";
+    }
+  }
 
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {items.map((item, index) => (
-          <ListItem component={Link} button key={item.text} to={item.route}>
-            <ListItemText primary={item.text} />
+        <ListItem button component={Link} to={"./login"}>
+          <ListItemText primary="Entrar" />
+        </ListItem>
+
+        <ListItem button component={Link} to={"./veiculos"}>
+          <ListItemText primary="Veículos" />
+        </ListItem>
+
+        {userLogged.token &&
+          ["./dashboard", "/marcas", "./usuarios"].map((path) => (
+            <ListItem
+              button
+              component={Link}
+              key={getMenuTitle(path)}
+              to={path}
+            >
+              <ListItemText primary={getMenuTitle(path)} />
+            </ListItem>
+          ))}
+
+        {!userLogged.token && (
+          <ListItem component={Link} to="/">
+            <ListItemText primary={location.text} />
           </ListItem>
-        ))}
+        )}
       </List>
     </div>
   );
