@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import React from "react";
+import React from 'react';
 import {
   Button,
   Dialog,
@@ -7,8 +7,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from "@material-ui/core";
-import PropTypes from "prop-types";
+} from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const ConfirmDialog = ({ open, options, onCancel, onConfirm, onClose }) => {
   const {

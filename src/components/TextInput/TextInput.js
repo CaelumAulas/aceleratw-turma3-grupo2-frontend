@@ -1,7 +1,7 @@
-import { TextField } from "@material-ui/core";
-import React from "react";
+import { TextField } from '@material-ui/core';
+import React from 'react';
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const TextInput = ({ id, label, margin, fullWidth, ...rest }) => {
   return (
@@ -26,7 +26,7 @@ TextInput.propTypes = {
 };
 
 TextInput.defaultProps = {
-  margin: "normal",
+  margin: 'normal',
   fullWidth: true,
 };
 

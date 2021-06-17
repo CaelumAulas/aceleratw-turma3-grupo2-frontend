@@ -1,17 +1,17 @@
-import React from "react";
-import { Grid, makeStyles } from "@material-ui/core";
+import React from 'react';
+import { Grid, makeStyles } from '@material-ui/core';
 
-import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
-import DashCard from "fragments/Dashboard/DashCard";
+import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
+import DashCard from 'fragments/Dashboard/DashCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   papersContainer: {
-    height: "100%",
-    [theme.breakpoints.down("md")]: {
-      flexDirection: "column",
+    height: '100%',
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column',
     },
   },
   control: {
@@ -21,17 +21,17 @@ const useStyles = makeStyles((theme) => ({
 
 const mockedData = [
   {
-    brand: "GM",
+    brand: 'GM',
     quantity: 10,
     total: 50000,
   },
   {
-    brand: "FIAT",
+    brand: 'FIAT',
     quantity: 3,
     total: 20000,
   },
   {
-    brand: "Renault",
+    brand: 'Renault',
     quantity: 2,
     total: 80000,
   },

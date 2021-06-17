@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
-import TextInput from "components/TextInput/TextInput";
-import CustomButton from "components/CustomButton/CustomButton";
-import userStyles from "./styles";
+import React, { useState } from 'react';
+import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
+import TextInput from 'components/TextInput/TextInput';
+import CustomButton from 'components/CustomButton/CustomButton';
+import userStyles from './styles';
 
 const UserRegistrationForm = () => {
   const classes = userStyles();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   function handleRegisterUser() {
     fetch(`http://localhost:8080/users`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name: username,
@@ -56,9 +56,9 @@ const UserRegistrationForm = () => {
           type="password"
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
-        <div style={{ display: "flex" }}>
+        <div style={{ display: 'flex' }}>
           <CustomButton
-            style={{ marginRight: "10px" }}
+            style={{ marginRight: '10px' }}
             type="reset"
             color="secondary"
             label="Cancelar"

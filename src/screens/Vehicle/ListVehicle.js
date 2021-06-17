@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
-import ListVehicleTable from "fragments/Vehicle/ListVehicleTable";
+import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
+import ListVehicleTable from 'fragments/Vehicle/ListVehicleTable';
 
 const ListVehicle = () => {
   return (

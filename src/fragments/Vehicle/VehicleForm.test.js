@@ -1,76 +1,76 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import VehicleForm from "./VehicleForm";
-import LoadingProvider from "contexts/LoadingContext";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import VehicleForm from './VehicleForm';
+import LoadingProvider from 'contexts/LoadingContext';
 
-jest.mock("react-router-dom", () => ({
+jest.mock('react-router-dom', () => ({
   useLocation: jest.fn().mockReturnValue({
-    pathname: "/veiculos/cadastro",
-    search: "",
-    hash: "",
+    pathname: '/veiculos/cadastro',
+    search: '',
+    hash: '',
     state: undefined,
-    key: "5nvxpbdafa",
+    key: '5nvxpbdafa',
   }),
   useHistory: jest.fn().mockReturnValue({
     push: jest.fn(),
   }),
 }));
 
-describe("vehicle form", () => {
-  it("should render an add button", async () => {
+describe('vehicle form', () => {
+  it('should render an add button', async () => {
     render(
       <LoadingProvider>
         <VehicleForm />
       </LoadingProvider>
     );
-    screen.getByRole("button", { name: "Salvar" });
+    screen.getByRole('button', { name: 'Salvar' });
   });
 
-  it("should render an cancel button", async () => {
+  it('should render an cancel button', async () => {
     render(
       <LoadingProvider>
         <VehicleForm />
       </LoadingProvider>
     );
-    screen.getByRole("button", { name: "Cancelar" });
+    screen.getByRole('button', { name: 'Cancelar' });
   });
 
-  describe("should render inputs", () => {
-    it("should render select brand", async () => {
+  describe('should render inputs', () => {
+    it('should render select brand', async () => {
       render(
         <LoadingProvider>
           <VehicleForm />
         </LoadingProvider>
       );
-      const selectBrand = await screen.findByTestId("select-brand");
+      const selectBrand = await screen.findByTestId('select-brand');
       expect(selectBrand).toBeInTheDocument();
     });
 
-    it("should render input model", async () => {
+    it('should render input model', async () => {
       render(
         <LoadingProvider>
           <VehicleForm />
         </LoadingProvider>
       );
-      screen.getByRole("textbox", { name: "Modelo" });
+      screen.getByRole('textbox', { name: 'Modelo' });
     });
 
-    it("should render input year", async () => {
+    it('should render input year', async () => {
       render(
         <LoadingProvider>
           <VehicleForm />
         </LoadingProvider>
       );
-      screen.getByRole("textbox", { name: "Ano" });
+      screen.getByRole('textbox', { name: 'Ano' });
     });
 
-    it("should render input value", async () => {
+    it('should render input value', async () => {
       render(
         <LoadingProvider>
           <VehicleForm />
         </LoadingProvider>
       );
-      screen.getByRole("textbox", { name: "Valor" });
+      screen.getByRole('textbox', { name: 'Valor' });
     });
   });
 });

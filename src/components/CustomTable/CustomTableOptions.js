@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import CustomButton from "components/CustomButton/CustomButton";
+import CustomButton from 'components/CustomButton/CustomButton';
 
-import customTableStyles from "./styles";
+import customTableStyles from './styles';
 
 const CustomTableOptions = ({
   handleDelete,
@@ -16,9 +16,9 @@ const CustomTableOptions = ({
   return (
     <div
       style={{
-        display: "flex",
-        marginTop: "10px",
-        justifyContent: "flex-end",
+        display: 'flex',
+        marginTop: '10px',
+        justifyContent: 'flex-end',
       }}
     >
       <CustomButton
@@ -32,7 +32,7 @@ const CustomTableOptions = ({
       <CustomButton
         variant="contained"
         label="Alterar"
-        style={{ marginRight: "10px" }}
+        style={{ marginRight: '10px' }}
         className={classes.updateButton}
         onClick={handleUpdate}
         disabled={!!(itemsSelected > 1 || hasNoItemsSelected)}

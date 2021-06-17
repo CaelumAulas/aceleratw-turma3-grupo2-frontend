@@ -1,45 +1,45 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import ListUserTable from "./ListUserTable";
-import LoadingProvider from "contexts/LoadingContext";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import ListUserTable from './ListUserTable';
+import LoadingProvider from 'contexts/LoadingContext';
 
-describe("<ListUserTable />", () => {
-  it("should render an delete button", async () => {
+describe('<ListUserTable />', () => {
+  it('should render an delete button', async () => {
     render(
       <LoadingProvider>
         <ListUserTable />
       </LoadingProvider>
     );
     const brandListDeleteButton = await screen.findByTestId(
-      "user-list-delete-button"
+      'user-list-delete-button'
     );
     expect(brandListDeleteButton).toBeInTheDocument();
-    expect(brandListDeleteButton).toHaveTextContent("Excluir");
+    expect(brandListDeleteButton).toHaveTextContent('Excluir');
   });
 
-  it("should render an update button", async () => {
+  it('should render an update button', async () => {
     render(
       <LoadingProvider>
         <ListUserTable />
       </LoadingProvider>
     );
     const brandListDeleteButton = await screen.findByTestId(
-      "user-list-update-button"
+      'user-list-update-button'
     );
     expect(brandListDeleteButton).toBeInTheDocument();
-    expect(brandListDeleteButton).toHaveTextContent("Alterar");
+    expect(brandListDeleteButton).toHaveTextContent('Alterar');
   });
 
-  it("should render an add button", async () => {
+  it('should render an add button', async () => {
     render(
       <LoadingProvider>
         <ListUserTable />
       </LoadingProvider>
     );
     const brandListDeleteButton = await screen.findByTestId(
-      "user-list-add-button"
+      'user-list-add-button'
     );
     expect(brandListDeleteButton).toBeInTheDocument();
-    expect(brandListDeleteButton).toHaveTextContent("Incluir");
+    expect(brandListDeleteButton).toHaveTextContent('Incluir');
   });
 });

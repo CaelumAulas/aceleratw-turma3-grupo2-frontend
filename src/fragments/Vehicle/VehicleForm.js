@@ -1,26 +1,26 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useHistory, useLocation } from "react-router-dom";
-import { MenuItem, Select, InputLabel, FormControl } from "@material-ui/core";
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { MenuItem, Select, InputLabel, FormControl } from '@material-ui/core';
 
-import CustomButton from "components/CustomButton/CustomButton";
-import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
-import TextInput from "components/TextInput/TextInput";
+import CustomButton from 'components/CustomButton/CustomButton';
+import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
+import TextInput from 'components/TextInput/TextInput';
 
-import UserLoggedContext from "contexts/UserLoggedContext";
-import VehicleFormContext from "contexts/VehicleFormContext";
-import useFormValidators from "hooks/useFormValidators";
+import UserLoggedContext from 'contexts/UserLoggedContext';
+import VehicleFormContext from 'contexts/VehicleFormContext';
+import useFormValidators from 'hooks/useFormValidators';
 
-import vehicleStyles from "./styles";
+import vehicleStyles from './styles';
 
 const VehicleForm = () => {
   const history = useHistory();
   const classes = vehicleStyles();
   const routeState = useLocation()?.state;
   const [formData, setFormData] = useState({
-    brand: "",
-    model: "",
-    year: "",
-    price: "0",
+    brand: '',
+    model: '',
+    year: '',
+    price: '0',
   });
   const [brandData, setBrandData] = useState([]);
   const userLogged = useContext(UserLoggedContext);
@@ -28,11 +28,11 @@ const VehicleForm = () => {
   const [isFormValid] = useFormValidators(formValidations);
 
   useEffect(() => {
-    fetch("http://localhost:8080/brands", {
-      method: "GET",
+    fetch('http://localhost:8080/brands', {
+      method: 'GET',
       headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + userLogged.token,
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + userLogged.token,
       },
     })
       .then((data) => data.json())
@@ -41,10 +41,10 @@ const VehicleForm = () => {
       });
 
     setFormData({
-      brand: routeState?.brand ?? "",
-      model: routeState?.model ?? "",
-      year: routeState?.year ?? "",
-      price: routeState?.price ?? "",
+      brand: routeState?.brand ?? '',
+      model: routeState?.model ?? '',
+      year: routeState?.year ?? '',
+      price: routeState?.price ?? '',
     });
   }, [routeState, userLogged]);
 
@@ -60,28 +60,28 @@ const VehicleForm = () => {
       const { url, method } = routeState
         ? {
             url: `http://localhost:8080/vehicle/${routeState.id}`,
-            method: "put",
+            method: 'put',
           }
         : {
-            url: "http://localhost:8080/vehicle",
-            method: "post",
+            url: 'http://localhost:8080/vehicle',
+            method: 'post',
           };
 
       fetch(url, {
         method,
         headers: {
-          Accept: "application/vnd.vtex.ds.v10+json",
+          Accept: 'application/vnd.vtex.ds.v10+json',
           Authorization: `Bearer ${userLogged.token}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           nameBrand: formData.brand,
           model: formData.model,
           years: formData.year,
-          price: formData.price.toString().replace(",", "."),
+          price: formData.price.toString().replace(',', '.'),
         }),
       }).then(() => {
-        history.push("/veiculos");
+        history.push('/veiculos');
       });
     }
   };
@@ -151,11 +151,11 @@ const VehicleForm = () => {
           }
         />
 
-        <div style={{ display: "flex" }}>
+        <div style={{ display: 'flex' }}>
           <CustomButton
-            style={{ marginRight: "10px" }}
+            style={{ marginRight: '10px' }}
             to="/veiculos"
-            onClick={() => history.push("/veiculos")}
+            onClick={() => history.push('/veiculos')}
             type="reset"
             color="secondary"
             label="Cancelar"

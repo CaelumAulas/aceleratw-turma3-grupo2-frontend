@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useCallback, Fragment } from "react";
-import ConfirmContext from "../../contexts/ConfirmContext";
-import ConfirmationDialog from "../Confirmation/ConfirmDialog";
+import React, { useState, useCallback } from 'react';
+import ConfirmContext from 'contexts/ConfirmContext';
+import ConfirmationDialog from './ConfirmDialog';
 
 const DEFAULT_OPTIONS = {
-  title: "Você tem certeza?",
-  description: "",
-  confirmationText: "Ok",
-  cancellationText: "Voltar",
+  title: 'Você tem certeza?',
+  description: '',
+  confirmationText: 'Ok',
+  cancellationText: 'Voltar',
   dialogProps: {},
   confirmationButtonProps: {},
   cancellationButtonProps: {},
@@ -48,12 +48,11 @@ const ConfirmProvider = ({ children, defaultOptions = {} }) => {
   const [resolve, reject] = resolveReject;
 
   const confirm = useCallback(
-    (options = {}) => {
-      return new Promise((resolve, reject) => {
+    (options = {}) =>
+      new Promise((resolve, reject) => {
         setOptions(buildOptions(defaultOptions, options));
         setResolveReject([resolve, reject]);
-      });
-    },
+      }),
     [defaultOptions]
   );
 
@@ -72,7 +71,7 @@ const ConfirmProvider = ({ children, defaultOptions = {} }) => {
   }, [resolve, handleClose]);
 
   return (
-    <Fragment>
+    <>
       <ConfirmContext.Provider value={confirm}>
         {children}
       </ConfirmContext.Provider>
@@ -84,7 +83,7 @@ const ConfirmProvider = ({ children, defaultOptions = {} }) => {
         onCancel={handleCancel}
         onConfirm={handleConfirm}
       />
-    </Fragment>
+    </>
   );
 };
 

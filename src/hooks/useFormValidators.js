@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 function useFormValidators(validationsContext) {
   const initialState = generateInitialState(validationsContext);
@@ -26,7 +26,7 @@ function useFormValidators(validationsContext) {
 function generateInitialState(validations) {
   const initialState = {};
   for (let field in validations) {
-    initialState[field] = { isValid: true, text: "" };
+    initialState[field] = { isValid: true, text: '' };
   }
 
   return initialState;

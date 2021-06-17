@@ -1,14 +1,14 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core';
 
 const userStyles = makeStyles({
   submitButton: {
-    marginRight: "10px",
+    marginRight: '10px',
   },
   deleteButton: {
-    marginRight: "10px",
+    marginRight: '10px',
   },
   updateButton: {
-    marginRight: "10px",
+    marginRight: '10px',
   },
 });
 

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useContext } from "react";
-import { Link, Redirect, useLocation } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import {
   AppBar,
   CssBaseline,
@@ -13,13 +13,13 @@ import {
   ListItemText,
   Toolbar,
   Typography,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import PropTypes from "prop-types";
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import PropTypes from 'prop-types';
 
-import UserLoggedContext from "contexts/UserLoggedContext";
+import UserLoggedContext from 'contexts/UserLoggedContext';
 
-import headerStyles from "./styles";
+import headerStyles from './styles';
 
 const PageHeader = (props) => {
   const classes = headerStyles();
@@ -34,23 +34,23 @@ const PageHeader = (props) => {
 
   function getMenuTitle(path) {
     switch (path) {
-      case "/marcas":
-        return "Marcas";
-      case "/usuarios":
-        return "Usuários";
-      case "/dashboard":
-        return "Dashboard";
-      case "/login":
-        return "Entrar";
-      case "/veiculos":
-        return "Veículos";
+      case '/marcas':
+        return 'Marcas';
+      case '/usuarios':
+        return 'Usuários';
+      case '/dashboard':
+        return 'Dashboard';
+      case '/login':
+        return 'Entrar';
+      case '/veiculos':
+        return 'Veículos';
       default:
-        return "";
+        return '';
     }
   }
 
   function logoff() {
-    userLogged.token = "";
+    userLogged.token = '';
     return <Redirect to="/" />;
   }
 
@@ -60,17 +60,17 @@ const PageHeader = (props) => {
       <Divider />
       <List>
         {!userLogged.token && (
-          <ListItem button component={Link} to={"/login"}>
+          <ListItem button component={Link} to={'/login'}>
             <ListItemText primary="Entrar" />
           </ListItem>
         )}
 
-        <ListItem button component={Link} to={"/veiculos"}>
+        <ListItem button component={Link} to={'/veiculos'}>
           <ListItemText primary="Veículos" />
         </ListItem>
 
         {userLogged.token &&
-          ["/dashboard", "/marcas", "/usuarios"].map((path) => (
+          ['/dashboard', '/marcas', '/usuarios'].map((path) => (
             <ListItem
               button
               component={Link}

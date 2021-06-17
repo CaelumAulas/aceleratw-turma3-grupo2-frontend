@@ -1,6 +1,6 @@
-import { Button } from "@material-ui/core";
-import PropTypes from "prop-types";
-import React from "react";
+import { Button } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const CustomButton = ({
   className,
@@ -12,7 +12,7 @@ const CustomButton = ({
   ...rest
 }) => {
   return (
-    <div className={divClassName} style={{ display: "flex" }}>
+    <div className={divClassName} style={{ display: 'flex' }}>
       <Button
         {...rest}
         variant="contained"
@@ -39,10 +39,10 @@ CustomButton.propTypes = {
 CustomButton.defaultProps = {
   className: null,
   divClassName: null,
-  type: "",
-  color: "primary",
-  margin: "dense",
-  label: "",
+  type: '',
+  color: 'primary',
+  margin: 'dense',
+  label: '',
 };
 
 export default CustomButton;

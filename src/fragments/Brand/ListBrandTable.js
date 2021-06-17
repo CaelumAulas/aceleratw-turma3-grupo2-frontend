@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import useConfirm from "hooks/useConfirm";
-import useLoadingContext from "hooks/useLoadingContext";
+import useConfirm from 'hooks/useConfirm';
+import useLoadingContext from 'hooks/useLoadingContext';
 
-import CustomTable from "components/CustomTable/CustomTable";
-import CustomTableOptions from "components/CustomTable/CustomTableOptions";
+import CustomTable from 'components/CustomTable/CustomTable';
+import CustomTableOptions from 'components/CustomTable/CustomTableOptions';
 
 const ListBrandTable = () => {
   const { setLoading } = useLoadingContext();
@@ -46,9 +46,9 @@ const ListBrandTable = () => {
         // Temporary
         brandsSelected.forEach((brandSelected) => {
           fetch(`http://localhost:8080/brands/${brandSelected.id}`, {
-            method: "delete",
+            method: 'delete',
           }).then(() => {
-            fetch("http://localhost:8080/brands")
+            fetch('http://localhost:8080/brands')
               .then((data) => data.json())
               .then((response) => {
                 if (response?.content?.length) {
@@ -63,7 +63,7 @@ const ListBrandTable = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:8080/brands")
+    fetch('http://localhost:8080/brands')
       .then((data) => data.json())
       .then((response) => {
         if (response?.content?.length) {
@@ -85,16 +85,16 @@ const ListBrandTable = () => {
     <>
       <CustomTable
         customTableProps={{
-          title: "Marca",
+          title: 'Marca',
           data: brandsName,
-          columns: ["Nome"],
+          columns: ['Nome'],
           options,
         }}
       />
       <CustomTableOptions
         handleDelete={handleBrandDelete}
-        handleUpdate={() => history.push("/marcas/cadastro", brandsSelected[0])}
-        handleNewRegister={() => history.push("/marcas/cadastro")}
+        handleUpdate={() => history.push('/marcas/cadastro', brandsSelected[0])}
+        handleNewRegister={() => history.push('/marcas/cadastro')}
         itemsSelected={brandsSelectedQuantity}
       />
     </>
