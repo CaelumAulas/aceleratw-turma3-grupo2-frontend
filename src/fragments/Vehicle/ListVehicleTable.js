@@ -1,18 +1,27 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  useContext,
+} from "react";
 import CustomButton from "components/CustomButton/CustomButton";
 import MUIDataTable from "mui-datatables";
 import vehicleStyles from "./styles";
 import { useHistory } from "react-router-dom";
 import useConfirm from "../../hooks/useConfirm";
+import UserLoggedContext from "contexts/UserLoggedContext";
 
 const columns = ["Marca", "Modelo", "Ano", "Valor"];
 
 const ListVehicleTable = () => {
   const history = useHistory();
+  const userLogged = useContext(UserLoggedContext);
   const classes = vehicleStyles();
   const [vehicles, setVehicles] = useState([]);
   const [vehiclesSelected, setVehiclesSelected] = useState([]);
   const confirm = useConfirm();
+  const vehiclesSelectedQuantity = vehiclesSelected.length;
 
   const options = useMemo(
     () => ({
@@ -58,6 +67,11 @@ const ListVehicleTable = () => {
               ...acc,
               {
                 id: vehicles[rowSelected.index].idVehicle,
+                brand: vehicles[rowSelected.index].brand,
+                brandId: vehicles[rowSelected.index].brandId,
+                model: vehicles[rowSelected.index].model,
+                year: vehicles[rowSelected.index].years,
+                price: vehicles[rowSelected.index].price,
               },
             ];
             return acc;
@@ -78,6 +92,9 @@ const ListVehicleTable = () => {
         vehiclesSelected.forEach((vehiclesSelected) => {
           fetch(`http://localhost:8080/vehicle/${vehiclesSelected.id}`, {
             method: "delete",
+            headers: {
+              Authorization: "Bearer " + userLogged.token,
+            },
           }).then(() => {
             // Verify refresh table
             fetch("http://localhost:8080/vehicle")
@@ -122,40 +139,45 @@ const ListVehicleTable = () => {
         options={options}
       />
 
-      <div
-        style={{
-          display: "flex",
-          marginTop: "10px",
-          justifyContent: "flex-end",
-        }}
-      >
-        <CustomButton
-          color="secondary"
-          variant="contained"
-          label="Excluir"
-          className={classes.deleteButton}
-          onClick={handleDeleteVehicle}
-        />
-        <CustomButton
-          variant="contained"
-          label="Alterar"
-          style={{ marginRight: "10px" }}
-          className={classes.updateButton}
-          onClick={() =>
-            history.push({
-              pathname: "/veiculos/cadastro/",
-              state: vehiclesSelected[0],
-            })
-          }
-        />
-        <CustomButton
-          to="/veiculos/cadastro"
-          type="submit"
-          label="Incluir"
-          onClick={() => history.push("/veiculos/cadastro")}
-          className={classes.submitButton}
-        />
-      </div>
+      {userLogged.token && (
+        <div
+          style={{
+            display: "flex",
+            marginTop: "10px",
+            justifyContent: "flex-end",
+          }}
+        >
+          <CustomButton
+            color="secondary"
+            variant="contained"
+            label="Excluir"
+            className={classes.deleteButton}
+            onClick={handleDeleteVehicle}
+          />
+          <CustomButton
+            variant="contained"
+            label="Alterar"
+            style={{ marginRight: "10px" }}
+            className={classes.updateButton}
+            disabled={
+              !!(vehiclesSelectedQuantity > 1 || vehiclesSelectedQuantity === 0)
+            }
+            onClick={() =>
+              history.push({
+                pathname: "/veiculos/cadastro/",
+                state: vehiclesSelected[0],
+              })
+            }
+          />
+          <CustomButton
+            to="/veiculos/cadastro"
+            type="submit"
+            label="Incluir"
+            onClick={() => history.push("/veiculos/cadastro")}
+            className={classes.submitButton}
+          />
+        </div>
+      )}
     </>
   );
 };

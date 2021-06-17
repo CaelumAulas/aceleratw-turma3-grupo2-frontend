@@ -12,7 +12,7 @@ import VehicleRegistration from "screens/Vehicle/VehicleRegistration";
 import ListVehicle from "screens/Vehicle/ListVehicle";
 import PageHeader from "components/PageHeader/PageHeader";
 import ConfirmProvider from "components/Confirmation/ConfirmProvider";
-// import PrivateRoute from "components/PrivateRoute/PrivateRoute";
+import PrivateRoute from "components/PrivateRoute/PrivateRoute";
 
 export default function Routes() {
   return (
@@ -20,16 +20,26 @@ export default function Routes() {
       <ConfirmProvider>
         <PageHeader>
           <Switch>
-            {/* <PrivateRoute exact path="/" component={Dashboard} /> */}
-            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/" component={ListVehicle} />
             <Route path="/login" exact component={Login} />
-            <Route path="/usuarios/cadastro" component={UserRegistration} />
-            <Route path="/usuarios" component={ListUsers} />
-            <Route path="/marcas/cadastro" component={BrandRegistration} />
-            <Route path="/marcas" component={ListBrand} />
-            <Route path="/veiculos/cadastro" component={VehicleRegistration} />
             <Route path="/veiculos" component={ListVehicle} />
             <Route path="/recuperar-senha" component={UserForgotPassword} />
+            <PrivateRoute path="/dashboard">
+              <Dashboard />
+            </PrivateRoute>
+            <PrivateRoute
+              path="/usuarios/cadastro"
+              component={UserRegistration}
+            />
+            <PrivateRoute path="/usuarios" component={ListUsers} />
+            <PrivateRoute
+              path="/marcas/cadastro"
+              component={BrandRegistration}
+            />
+            <PrivateRoute path="/marcas" component={ListBrand} />
+            <PrivateRoute path="/veiculos/cadastro">
+              <VehicleRegistration />
+            </PrivateRoute>
             <Route>
               <PageNotFound />
             </Route>
