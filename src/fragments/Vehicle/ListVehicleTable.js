@@ -71,7 +71,7 @@ const ListVehicleTable = () => {
         });
       }
     });
-  }, [confirm, vehiclesSelectedQuantity, vehiclesSelected]);
+  }, [confirm, vehiclesSelectedQuantity, vehiclesSelected, userLogged.token]);
 
   useEffect(() => {
     setLoading(true);
