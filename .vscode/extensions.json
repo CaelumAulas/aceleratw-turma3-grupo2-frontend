@@ -1,12 +1,13 @@
 {
-    "recommendations": [
-        "coenraads.bracket-pair-colorizer",
-        "naumovs.color-highlight",
-        "msjsdiag.debugger-for-chrome",
-        "eamodio.gitlens",
-        "esbenp.prettier-vscode",
-        "abumalick.vscode-nvm",
-        "dbaeumer.vscode-eslint",
-        "burkeholland.simple-react-snippets"
-    ]
+  "recommendations": [
+    "coenraads.bracket-pair-colorizer",
+    "naumovs.color-highlight",
+    "msjsdiag.debugger-for-chrome",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "abumalick.vscode-nvm",
+    "dbaeumer.vscode-eslint",
+    "burkeholland.simple-react-snippets",
+    "editorconfig.editorconfig"
+  ]
 }
