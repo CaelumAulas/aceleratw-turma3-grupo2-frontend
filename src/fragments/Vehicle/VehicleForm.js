@@ -1,121 +1,178 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useHistory, useLocation } from "react-router-dom";
+import {
+  TextInput,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@material-ui/core";
+
 import CustomButton from "components/CustomButton/CustomButton";
 import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
-import TextInput from "components/TextInput/TextInput";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
+
+import UserLoggedContext from "contexts/UserLoggedContext";
+import VehicleFormContext from "contexts/VehicleFormContext";
+import useFormValidators from "hooks/useFormValidators";
+
 import vehicleStyles from "./styles";
-import { useHistory } from "react-router-dom";
-import useLoadingContext from "hooks/useLoadingContext";
 
 const VehicleForm = () => {
   const history = useHistory();
   const classes = vehicleStyles();
-  const { setLoading } = useLoadingContext();
+  const routeState = useLocation()?.state;
+  const [formData, setFormData] = useState({
+    brand: "",
+    model: "",
+    year: "",
+    price: "0",
+  });
   const [brandData, setBrandData] = useState([]);
-  const [brandValue, setBrandValue] = useState("");
-  const [modelValue, setModelValue] = useState("");
-  const [yearValue, setYearValue] = useState("");
-  const [priceValue, setPriceValue] = useState("");
+  const userLogged = useContext(UserLoggedContext);
+  const formValidations = useContext(VehicleFormContext);
+  const [isFormValid] = useFormValidators(formValidations);
 
   useEffect(() => {
-    setLoading(true);
-    fetch("http://localhost:8080/brands")
+    fetch("http://localhost:8080/brands", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + userLogged.token,
+      },
+    })
       .then((data) => data.json())
       .then((response) => {
-        if (response?.content?.length) {
-          setBrandData(response.content);
-          setLoading(false);
-        }
+        setBrandData(response.content);
       });
-  }, [setLoading]);
 
-  const handleVehicleFormSubmit = useCallback(() => {
-    setLoading(true);
-    fetch("http://localhost:8080/vehicle", {
-      method: "post",
-      headers: {
-        Accept: "application/vnd.vtex.ds.v10+json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        nameBrand: brandValue,
-        model: modelValue,
-        years: yearValue,
-        price: priceValue.replace(",", "."),
-      }),
-    }).then(() => {
-      setLoading(false);
-      history.push("/veiculos");
+    setFormData({
+      brand: routeState?.brand ?? "",
+      model: routeState?.model ?? "",
+      year: routeState?.year ?? "",
+      price: routeState?.price ?? "",
     });
-  }, [setLoading, brandValue, modelValue, yearValue, priceValue, history]);
+  }, [routeState, userLogged]);
+
+  const updateField = (field) => {
+    setFormData({
+      ...formData,
+      ...field,
+    });
+  };
+
+  const handleVehicleFormSubmit = () => {
+    if (isFormValid) {
+      const { url, method } = routeState
+        ? {
+            url: `http://localhost:8080/vehicle/${routeState.id}`,
+            method: "put",
+          }
+        : {
+            url: "http://localhost:8080/vehicle",
+            method: "post",
+          };
+
+      fetch(url, {
+        method,
+        headers: {
+          Accept: "application/vnd.vtex.ds.v10+json",
+          Authorization: `Bearer ${userLogged.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nameBrand: formData.brand,
+          model: formData.model,
+          years: formData.year,
+          price: formData.price.toString().replace(",", "."),
+        }),
+      }).then(() => {
+        history.push("/veiculos");
+      });
+    }
+  };
 
   return (
-    <>
-      <GridFullHeight container direction="column" alignItems="center">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleVehicleFormSubmit();
-          }}
-        >
-          <FormControl data-testid="select-brand" variant="outlined" fullWidth>
-            <InputLabel required id="selectMarca">
-              Selecione uma marca
-            </InputLabel>
-            <Select onChange={(e) => setBrandValue(e.target.value)}>
-              {brandData.map((brand) => {
-                return (
-                  <MenuItem key={brand.name} value={brand.name}>
-                    {brand.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
+    <GridFullHeight container direction="column" alignItems="center">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleVehicleFormSubmit();
+        }}
+      >
+        <FormControl data-testid="select-brand" variant="outlined" fullWidth>
+          <InputLabel required id="selectMarca">
+            Selecione uma marca
+          </InputLabel>
+          <Select
+            required
+            value={formData.brand}
+            onChange={(e) =>
+              updateField({
+                brand: e.target.value,
+              })
+            }
+          >
+            {brandData.map((brand) => {
+              return (
+                <MenuItem key={brand.name} value={brand.name}>
+                  {brand.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+        </FormControl>
 
-          <TextInput
-            value={modelValue}
-            id="model"
-            label="Modelo"
-            required
-            onChange={(e) => setModelValue(e.target.value)}
-          />
-          <TextInput
-            value={yearValue}
-            id="year"
-            label="Ano"
-            required
-            onChange={(e) => setYearValue(e.target.value)}
-          />
-          <TextInput
-            value={priceValue}
-            id="value"
-            label="Valor"
-            required
-            onChange={(e) => setPriceValue(e.target.value)}
-          />
+        <TextInput
+          id="model"
+          label="Modelo"
+          required
+          value={formData.model}
+          onChange={(e) =>
+            updateField({
+              model: e.target.value,
+            })
+          }
+        />
+        <TextInput
+          id="year"
+          label="Ano"
+          required
+          value={formData.year}
+          onChange={(e) =>
+            updateField({
+              year: e.target.value,
+            })
+          }
+        />
+        <TextInput
+          id="value"
+          label="Valor"
+          required
+          value={formData.price}
+          onChange={(e) =>
+            updateField({
+              price: e.target.value,
+            })
+          }
+        />
 
-          <div style={{ display: "flex" }}>
-            <CustomButton
-              style={{ marginRight: "10px" }}
-              to="/veiculos"
-              onClick={() => history.push("/veiculos")}
-              type="reset"
-              color="secondary"
-              label="Cancelar"
-            />
-            <CustomButton
-              type="submit"
-              label="Salvar"
-              className={classes.submitButton}
-            />
-          </div>
-        </form>
-      </GridFullHeight>
-    </>
+        <div style={{ display: "flex" }}>
+          <CustomButton
+            style={{ marginRight: "10px" }}
+            to="/veiculos"
+            onClick={() => history.push("/veiculos")}
+            type="reset"
+            color="secondary"
+            label="Cancelar"
+          />
+          <CustomButton
+            type="submit"
+            label="Salvar"
+            className={classes.submitButton}
+          />
+        </div>
+      </form>
+    </GridFullHeight>
   );
 };
 

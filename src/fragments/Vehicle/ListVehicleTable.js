@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import UserLoggedContext from "contexts/UserLoggedContext";
 
 import useConfirm from "hooks/useConfirm";
 import useLoadingContext from "hooks/useLoadingContext";
@@ -13,6 +14,7 @@ const ListVehicleTable = () => {
   const { setLoading } = useLoadingContext();
   const [vehicles, setVehicles] = useState([]);
   const [vehiclesSelected, setVehiclesSelected] = useState([]);
+  const userLogged = useContext(UserLoggedContext);
   const vehiclesSelectedQuantity = vehiclesSelected.length;
 
   const options = useMemo(
@@ -24,6 +26,11 @@ const ListVehicleTable = () => {
               ...acc,
               {
                 id: vehicles[rowSelected.index].idVehicle,
+                brand: vehicles[rowSelected.index].brand,
+                brandId: vehicles[rowSelected.index].brandId,
+                model: vehicles[rowSelected.index].model,
+                year: vehicles[rowSelected.index].years,
+                price: vehicles[rowSelected.index].price,
               },
             ];
             return acc;
@@ -44,6 +51,9 @@ const ListVehicleTable = () => {
         vehiclesSelected.forEach((vehiclesSelected) => {
           fetch(`http://localhost:8080/vehicle/${vehiclesSelected.id}`, {
             method: "delete",
+            headers: {
+              Authorization: "Bearer " + userLogged.token,
+            },
           }).then(() => {
             // Verify refresh table
             fetch("http://localhost:8080/vehicle")
@@ -91,17 +101,19 @@ const ListVehicleTable = () => {
           options,
         }}
       />
-      <CustomTableOptions
-        handleDelete={handleDeleteVehicle}
-        handleUpdate={() =>
-          history.push({
-            pathname: "/veiculos/cadastro/",
-            state: vehiclesSelected[0],
-          })
-        }
-        handleNewRegister={() => history.push("/veiculos/cadastro")}
-        itemsSelected={vehiclesSelectedQuantity}
-      />
+      {userLogged.token && (
+        <CustomTableOptions
+          handleDelete={handleDeleteVehicle}
+          handleUpdate={() =>
+            history.push({
+              pathname: "/veiculos/cadastro/",
+              state: vehiclesSelected[0],
+            })
+          }
+          handleNewRegister={() => history.push("/veiculos/cadastro")}
+          itemsSelected={vehiclesSelectedQuantity}
+        />
+      )}
     </>
   );
 };
