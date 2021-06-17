@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import CustomButton from 'components/CustomButton/CustomButton';
 
-import customTableStyles from './styles';
+import customTableStyles from './customTableStyles';
 
 const CustomTableOptions = ({
   handleDelete,

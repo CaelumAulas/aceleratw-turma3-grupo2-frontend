@@ -48,10 +48,10 @@ const ConfirmProvider = ({ children, defaultOptions = {} }) => {
   const [resolve, reject] = resolveReject;
 
   const confirm = useCallback(
-    (options = {}) =>
-      new Promise((resolve, reject) => {
-        setOptions(buildOptions(defaultOptions, options));
-        setResolveReject([resolve, reject]);
+    (option = {}) =>
+      new Promise((resol, rej) => {
+        setOptions(buildOptions(defaultOptions, option));
+        setResolveReject([resol, rej]);
       }),
     [defaultOptions]
   );

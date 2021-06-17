@@ -2,8 +2,7 @@ import { useContext } from 'react';
 import ConfirmContext from '../contexts/ConfirmContext';
 
 const useConfirm = () => {
-  const confirm = useContext(ConfirmContext);
-  return confirm;
+  return useContext(ConfirmContext);
 };
 
 export default useConfirm;

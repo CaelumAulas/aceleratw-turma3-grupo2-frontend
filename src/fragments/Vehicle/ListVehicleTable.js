@@ -54,8 +54,8 @@ const ListVehicleTable = () => {
       description: `O(s) veículo(s) será(ão) excluído(s)`,
     }).then(() => {
       if (vehiclesSelectedQuantity) {
-        vehiclesSelected.forEach((vehiclesSelected) => {
-          fetch(`http://localhost:8080/vehicle/${vehiclesSelected.id}`, {
+        vehiclesSelected.forEach((vehicleSelected) => {
+          fetch(`http://localhost:8080/vehicle/${vehicleSelected.id}`, {
             method: 'delete',
             headers: {
               Authorization: 'Bearer ' + userLogged.token,

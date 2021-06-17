@@ -1,7 +1,7 @@
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
 import CustomButton from 'components/CustomButton/CustomButton';
-import userStyles from './styles';
+import userStyles from './userStyles';
 
 const columns = ['Nome'];
 

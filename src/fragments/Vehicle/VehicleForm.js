@@ -10,7 +10,7 @@ import UserLoggedContext from 'contexts/UserLoggedContext';
 import VehicleFormContext from 'contexts/VehicleFormContext';
 import useFormValidators from 'hooks/useFormValidators';
 
-import vehicleStyles from './styles';
+import vehicleStyles from './vehicleStyles';
 
 const VehicleForm = () => {
   const history = useHistory();

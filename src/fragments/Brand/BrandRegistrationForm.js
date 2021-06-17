@@ -5,7 +5,7 @@ import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
 import TextInput from 'components/TextInput/TextInput';
 import CustomButton from 'components/CustomButton/CustomButton';
 
-import brandStyles from './styles';
+import brandStyles from './brandStyles';
 
 const BrandRegistrationForm = () => {
   const routeState = useLocation()?.state;

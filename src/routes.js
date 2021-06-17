@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Dashboard from 'screens/Dashboard/Dashboard';
-import PageNotFound from 'screens/404/404';
+import PageNotFound from 'screens/NotFound/NotFound';
 import Login from 'screens/Login/Login';
 import UserRegistration from 'screens/User/UserRegistration';
 import BrandRegistration from 'screens/Brand/BrandRegistration';
 import UserForgotPassword from 'screens/User/UserForgotPassword';
-import ListUsers from 'screens/User/ListUser';
+import ListUsers from 'screens/User/ListUsers';
 import ListBrand from 'screens/Brand/ListBrand';
 import VehicleRegistration from 'screens/Vehicle/VehicleRegistration';
 import ListVehicle from 'screens/Vehicle/ListVehicle';

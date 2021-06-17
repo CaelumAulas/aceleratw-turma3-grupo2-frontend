@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
 import TextInput from 'components/TextInput/TextInput';
 import CustomButton from 'components/CustomButton/CustomButton';
-import userStyles from './styles';
+import userStyles from './userStyles';
 
 const UserRegistrationForm = () => {
   const classes = userStyles();
