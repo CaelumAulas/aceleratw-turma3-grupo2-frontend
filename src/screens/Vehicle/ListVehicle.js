@@ -1,8 +1,7 @@
 import React from "react";
-const { GridFullHeight } = require("components/GridFullHeight/GridFullHeight");
-const {
-  default: ListVehicleTable,
-} = require("fragments/Vehicle/ListVehicleTable");
+
+import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
+import ListVehicleTable from "fragments/Vehicle/ListVehicleTable";
 
 const ListVehicle = () => {
   return (

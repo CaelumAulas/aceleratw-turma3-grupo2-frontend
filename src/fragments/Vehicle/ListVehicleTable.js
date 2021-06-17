@@ -105,4 +105,5 @@ const ListVehicleTable = () => {
     </>
   );
 };
+
 export default ListVehicleTable;
