@@ -7,5 +7,6 @@ export default function PrivateRoute({ children, ...rest }) {
   const isAuthenticated = useContext(UserLoggedContext);
 
   if (!isAuthenticated.token) return <Redirect to="/login" />;
+
   return <Route {...rest}>{children}</Route>;
 }
