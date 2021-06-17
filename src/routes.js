@@ -21,8 +21,7 @@ export default function Routes() {
         <PageHeader>
           <Switch>
             <Route exact path="/" component={ListVehicle} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/veiculos" component={ListVehicle} />
+            <Route path="/login" component={Login} />
             <Route path="/recuperar-senha" component={UserForgotPassword} />
             <PrivateRoute path="/dashboard">
               <Dashboard />
@@ -31,15 +30,16 @@ export default function Routes() {
               path="/usuarios/cadastro"
               component={UserRegistration}
             />
-            <PrivateRoute path="/usuarios" component={ListUsers} />
             <PrivateRoute
               path="/marcas/cadastro"
               component={BrandRegistration}
             />
-            <PrivateRoute path="/marcas" component={ListBrand} />
             <PrivateRoute path="/veiculos/cadastro">
               <VehicleRegistration />
             </PrivateRoute>
+            <PrivateRoute path="/usuarios" component={ListUsers} />
+            <PrivateRoute path="/marcas" component={ListBrand} />
+            <Route path="/veiculos" component={ListVehicle} />
             <Route>
               <PageNotFound />
             </Route>
