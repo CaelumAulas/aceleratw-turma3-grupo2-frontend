@@ -1,17 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import MUIDataTable from "mui-datatables";
-import CustomButton from "components/CustomButton/CustomButton";
-import brandStyles from "./styles";
-import useConfirm from "hooks/useConfirm";
 
+import useConfirm from "hooks/useConfirm";
 import useLoadingContext from "hooks/useLoadingContext";
 
-const columns = ["Nome"];
+import CustomTable from "components/CustomTable/CustomTable";
+import CustomTableOptions from "components/CustomTable/CustomTableOptions";
 
 const ListBrandTable = () => {
   const { setLoading } = useLoadingContext();
-  const classes = brandStyles();
   const history = useHistory();
   const [brands, setBrands] = useState([]);
   const [brandsSelected, setBrandsSelected] = useState([]);
@@ -20,9 +17,6 @@ const ListBrandTable = () => {
 
   const options = useMemo(
     () => ({
-      download: false,
-      print: false,
-      filterType: "checkbox",
       onRowsDelete: () => false,
       onRowSelectionChange: (_, allRowsSelected) => {
         const currentBrandSelected = allRowsSelected.reduce(
@@ -89,46 +83,20 @@ const ListBrandTable = () => {
 
   return (
     <>
-      <MUIDataTable
-        title={"Marca"}
-        data={brandsName}
-        columns={columns}
-        options={options}
-      />
-      <div
-        style={{
-          display: "flex",
-          marginTop: "10px",
-          justifyContent: "flex-end",
+      <CustomTable
+        customTableProps={{
+          title: "Marca",
+          data: brandsName,
+          columns: ["Nome"],
+          options,
         }}
-      >
-        <CustomButton
-          variant="contained"
-          color="primary"
-          label="Alterar"
-          className={classes.updateButton}
-          onClick={() => history.push("/marcas/cadastro", brandsSelected[0])}
-          disabled={
-            !!(brandsSelectedQuantity > 1 || brandsSelectedQuantity === 0)
-          }
-          data-testid="brand-list-update-button"
-        />
-        <CustomButton
-          type="reset"
-          className={classes.deleteButton}
-          color="secondary"
-          label="Excluir"
-          onClick={handleBrandDelete}
-          data-testid="brand-list-delete-button"
-        />
-        <CustomButton
-          variant="contained"
-          color="primary"
-          label="Incluir"
-          onClick={() => history.push("/marcas/cadastro")}
-          data-testid="brand-list-add-button"
-        />
-      </div>
+      />
+      <CustomTableOptions
+        handleDelete={handleBrandDelete}
+        handleUpdate={() => history.push("/marcas/cadastro", brandsSelected[0])}
+        handleNewRegister={() => history.push("/marcas/cadastro")}
+        itemsSelected={brandsSelectedQuantity}
+      />
     </>
   );
 };

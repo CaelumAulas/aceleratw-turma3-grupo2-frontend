@@ -1,58 +1,22 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
-import CustomButton from "components/CustomButton/CustomButton";
-import MUIDataTable from "mui-datatables";
-import vehicleStyles from "./styles";
 import { useHistory } from "react-router-dom";
+
 import useConfirm from "hooks/useConfirm";
 import useLoadingContext from "hooks/useLoadingContext";
 
-const columns = ["Marca", "Modelo", "Ano", "Valor"];
+import CustomTable from "components/CustomTable/CustomTable";
+import CustomTableOptions from "components/CustomTable/CustomTableOptions";
 
 const ListVehicleTable = () => {
   const history = useHistory();
-  const classes = vehicleStyles();
-  const [vehicles, setVehicles] = useState([]);
-  const [vehiclesSelected, setVehiclesSelected] = useState([]);
   const confirm = useConfirm();
   const { setLoading } = useLoadingContext();
+  const [vehicles, setVehicles] = useState([]);
+  const [vehiclesSelected, setVehiclesSelected] = useState([]);
+  const vehiclesSelectedQuantity = vehiclesSelected.length;
 
   const options = useMemo(
     () => ({
-      download: false,
-      print: false,
-      filterType: "checkbox",
-      textLabels: {
-        body: {
-          noMatch: "Nenhum registro encontrado",
-          toolTip: "Sort",
-          columnHeaderTooltip: (column) => `Sort for ${column.label}`,
-        },
-        toolbar: {
-          search: "Pesquisar",
-          viewColumns: "Visualizar Colunas",
-          filterTable: "Filtrar",
-        },
-        filter: {
-          all: "Todas",
-          title: "FILTROS",
-          reset: "LIMPAR",
-        },
-        viewColumns: {
-          title: "Visualizar",
-          titleAria: "Mostrar/Esconder Colunas",
-        },
-        selectedRows: {
-          text: "registro(s) selecionados",
-          delete: false,
-          deleteAria: "Excluir registros selecionados",
-        },
-        pagination: {
-          next: "Próxima Página",
-          previous: "Página Anterior",
-          rowsPerPage: "Registros por página:",
-          displayRows: "de",
-        },
-      },
       onRowSelectionChange: (_, allRowsSelected) => {
         const currentBrandSelected = allRowsSelected.reduce(
           (acc, rowSelected) => {
@@ -76,7 +40,7 @@ const ListVehicleTable = () => {
     confirm({
       description: `O(s) veículo(s) será(ão) excluído(s)`,
     }).then(() => {
-      if (vehiclesSelected?.length) {
+      if (vehiclesSelectedQuantity) {
         vehiclesSelected.forEach((vehiclesSelected) => {
           fetch(`http://localhost:8080/vehicle/${vehiclesSelected.id}`, {
             method: "delete",
@@ -91,7 +55,7 @@ const ListVehicleTable = () => {
         });
       }
     });
-  }, [vehiclesSelected, confirm]);
+  }, [confirm, vehiclesSelectedQuantity, vehiclesSelected]);
 
   useEffect(() => {
     setLoading(true);
@@ -119,47 +83,25 @@ const ListVehicleTable = () => {
 
   return (
     <>
-      <MUIDataTable
-        title={"Veículos"}
-        data={vehiclesData}
-        columns={columns}
-        options={options}
-      />
-
-      <div
-        style={{
-          display: "flex",
-          marginTop: "10px",
-          justifyContent: "flex-end",
+      <CustomTable
+        customTableProps={{
+          title: "Veículos",
+          data: vehiclesData,
+          columns: ["Marca", "Modelo", "Ano", "Valor"],
+          options,
         }}
-      >
-        <CustomButton
-          color="secondary"
-          variant="contained"
-          label="Excluir"
-          className={classes.deleteButton}
-          onClick={handleDeleteVehicle}
-        />
-        <CustomButton
-          variant="contained"
-          label="Alterar"
-          style={{ marginRight: "10px" }}
-          className={classes.updateButton}
-          onClick={() =>
-            history.push({
-              pathname: "/veiculos/cadastro/",
-              state: vehiclesSelected[0],
-            })
-          }
-        />
-        <CustomButton
-          to="/veiculos/cadastro"
-          type="submit"
-          label="Incluir"
-          onClick={() => history.push("/veiculos/cadastro")}
-          className={classes.submitButton}
-        />
-      </div>
+      />
+      <CustomTableOptions
+        handleDelete={handleDeleteVehicle}
+        handleUpdate={() =>
+          history.push({
+            pathname: "/veiculos/cadastro/",
+            state: vehiclesSelected[0],
+          })
+        }
+        handleNewRegister={() => history.push("/veiculos/cadastro")}
+        itemsSelected={vehiclesSelectedQuantity}
+      />
     </>
   );
 };

@@ -76,6 +76,7 @@ const ConfirmProvider = ({ children, defaultOptions = {} }) => {
       <ConfirmContext.Provider value={confirm}>
         {children}
       </ConfirmContext.Provider>
+
       <ConfirmationDialog
         open={resolveReject.length === 2}
         options={options}
