@@ -1,15 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import {
-  TextInput,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
-} from "@material-ui/core";
+import { MenuItem, Select, InputLabel, FormControl } from "@material-ui/core";
 
 import CustomButton from "components/CustomButton/CustomButton";
 import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
+import TextInput from "components/TextInput/TextInput";
 
 import UserLoggedContext from "contexts/UserLoggedContext";
 import VehicleFormContext from "contexts/VehicleFormContext";

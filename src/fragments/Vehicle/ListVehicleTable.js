@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  useContext,
+} from "react";
 import { useHistory } from "react-router-dom";
 import UserLoggedContext from "contexts/UserLoggedContext";
 
