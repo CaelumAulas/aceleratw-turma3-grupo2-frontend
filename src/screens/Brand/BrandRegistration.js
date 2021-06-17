@@ -1,6 +1,6 @@
-import React from "react";
-import { ContainerFullHeight } from "components/ContainerFullHeight/ContainerFullHeight";
-import BrandRegistrationForm from "fragments/Brand/BrandRegistrationForm";
+import React from 'react';
+import { ContainerFullHeight } from 'components/ContainerFullHeight/ContainerFullHeight';
+import BrandRegistrationForm from 'fragments/Brand/BrandRegistrationForm';
 
 const BrandRegistration = () => {
   return (

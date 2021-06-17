@@ -1,14 +1,14 @@
-import React from "react";
-import MUIDataTable from "mui-datatables";
-import CustomButton from "components/CustomButton/CustomButton";
-import userStyles from "./styles";
+import React from 'react';
+import MUIDataTable from 'mui-datatables';
+import CustomButton from 'components/CustomButton/CustomButton';
+import userStyles from './styles';
 
-const columns = ["Nome"];
+const columns = ['Nome'];
 
-const data = [["Bianca"], ["Ingrid"], ["Luiza"], ["Ronaldo"], ["Wendel"]];
+const data = [['Bianca'], ['Ingrid'], ['Luiza'], ['Ronaldo'], ['Wendel']];
 
 const options = {
-  filterType: "checkbox",
+  filterType: 'checkbox',
 };
 
 const ListUserTable = () => {
@@ -17,16 +17,16 @@ const ListUserTable = () => {
   return (
     <>
       <MUIDataTable
-        title={"Usuários"}
+        title={'Usuários'}
         data={data}
         columns={columns}
         options={options}
       />
       <div
         style={{
-          display: "flex",
-          marginTop: "10px",
-          justifyContent: "flex-end",
+          display: 'flex',
+          marginTop: '10px',
+          justifyContent: 'flex-end',
         }}
       >
         <CustomButton

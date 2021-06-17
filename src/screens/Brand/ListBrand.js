@@ -1,6 +1,6 @@
-import React from "react";
-import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
-import ListBrandTable from "fragments/Brand/ListBrandTable";
+import React from 'react';
+import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
+import ListBrandTable from 'fragments/Brand/ListBrandTable';
 
 const ListBrand = () => {
   return (

@@ -1,6 +1,6 @@
-import React from "react";
-import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
-import ListUserTable from "fragments/User/ListUserTable";
+import React from 'react';
+import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
+import ListUserTable from 'fragments/User/ListUserTable';
 
 const ListUsers = () => {
   return (

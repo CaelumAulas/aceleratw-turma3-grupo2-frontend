@@ -1,7 +1,7 @@
-import React from "react";
-import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
-import TextInput from "components/TextInput/TextInput";
-import { Button, Typography } from "@material-ui/core";
+import React from 'react';
+import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
+import TextInput from 'components/TextInput/TextInput';
+import { Button, Typography } from '@material-ui/core';
 
 const UserForgotPasswordForm = () => {
   return (

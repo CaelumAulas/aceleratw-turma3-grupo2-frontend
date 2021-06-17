@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   Grid,
@@ -6,13 +6,13 @@ import {
   makeStyles,
   Container,
   Typography,
-} from "@material-ui/core";
-import PropTypes from "prop-types";
+} from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
   paperContainer: {
-    [theme.breakpoints.down("md")]: {
-      width: "100%",
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
       marginRight: 0,
       marginBottom: 20,
     },
@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     height: 400,
-    width: "100%",
+    width: '100%',
   },
   paperContent: {
-    height: "100%",
+    height: '100%',
   },
 }));
 
@@ -54,7 +54,7 @@ const DashCard = ({ size, brand, quantity, value }) => {
               component="p"
               data-testid="dashcard-quantity"
             >
-              {quantity} {quantity > 1 ? "veículos" : "veículo"}
+              {quantity} {quantity > 1 ? 'veículos' : 'veículo'}
             </Typography>
             <Typography
               align="center"
@@ -62,9 +62,9 @@ const DashCard = ({ size, brand, quantity, value }) => {
               component="p"
               data-testid="dashcard-price"
             >
-              {new Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL",
+              {new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
               }).format(value)}
             </Typography>
           </Container>

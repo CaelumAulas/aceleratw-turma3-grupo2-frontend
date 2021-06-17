@@ -1,12 +1,12 @@
-import React from "react";
-import { Backdrop, CircularProgress, makeStyles } from "@material-ui/core";
+import React from 'react';
+import { Backdrop, CircularProgress, makeStyles } from '@material-ui/core';
 
-import useLoadingContext from "hooks/useLoadingContext";
+import useLoadingContext from 'hooks/useLoadingContext';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: "#fff",
+    color: '#fff',
   },
 }));
 

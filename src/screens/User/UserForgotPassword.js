@@ -1,11 +1,11 @@
-import React from "react";
-import { ContainerFullHeight } from "components/ContainerFullHeight/ContainerFullHeight";
-import UserForgotPasswordForm from "fragments/User/UserForgotPasswordForm";
+import React from 'react';
+import { ContainerFullHeight } from 'components/ContainerFullHeight/ContainerFullHeight';
+import UserForgotPasswordForm from 'fragments/User/UserForgotPasswordForm';
 
 const UserForgotPassword = () => {
   return (
     <ContainerFullHeight>
-        <UserForgotPasswordForm/>
+      <UserForgotPasswordForm />
     </ContainerFullHeight>
   );
 };

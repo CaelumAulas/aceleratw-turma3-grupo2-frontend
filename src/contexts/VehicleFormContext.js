@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 const VehicleFormContext = createContext({
   brand: noValidation,
@@ -7,7 +7,7 @@ const VehicleFormContext = createContext({
 });
 
 function noValidation() {
-  return { isValid: true, text: "" };
+  return { isValid: true, text: '' };
 }
 
 export default VehicleFormContext;

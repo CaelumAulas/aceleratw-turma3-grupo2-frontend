@@ -22,22 +22,6 @@
     "test": "react-scripts test --watchAll --coverage",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "eslint:recommended",
-      "plugin:react/recommended"
-    ],
-    "rules": {
-      "react/require-default-props": [
-        2,
-        {
-          "forbidDefaultForRequired": true
-        }
-      ]
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -51,7 +35,13 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.27.0",
-    "eslint-plugin-react": "^7.24.0"
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.3.1"
   }
 }

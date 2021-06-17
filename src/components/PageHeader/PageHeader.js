@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useContext } from "react";
+import React, { useState, useContext } from 'react';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 import {
   AppBar,
   CssBaseline,
@@ -12,50 +13,16 @@ import {
   ListItemText,
   Toolbar,
   Typography,
-  makeStyles,
-} from "@material-ui/core";
-import { Link, Redirect, useLocation } from "react-router-dom";
-import MenuIcon from "@material-ui/icons/Menu";
-import UserLoggedContext from "../../contexts/UserLoggedContext";
-import PropTypes from "prop-types";
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import PropTypes from 'prop-types';
 
-const drawerWidth = 240;
+import UserLoggedContext from 'contexts/UserLoggedContext';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  drawer: {
-    [theme.breakpoints.up("sm")]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-  },
-  appBar: {
-    [theme.breakpoints.up("sm")]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-}));
+import headerStyles from './styles';
 
 const PageHeader = (props) => {
-  const classes = useStyles();
+  const classes = headerStyles();
   const location = useLocation();
   const userLogged = useContext(UserLoggedContext);
 
@@ -67,23 +34,23 @@ const PageHeader = (props) => {
 
   function getMenuTitle(path) {
     switch (path) {
-      case "/marcas":
-        return "Marcas";
-      case "./usuarios":
-        return "Usuários";
-      case "./dashboard":
-        return "Dashboard";
-      case "./login":
-        return "Entrar";
-      case "./veiculos":
-        return "Veículos";
+      case '/marcas':
+        return 'Marcas';
+      case '/usuarios':
+        return 'Usuários';
+      case '/dashboard':
+        return 'Dashboard';
+      case '/login':
+        return 'Entrar';
+      case '/veiculos':
+        return 'Veículos';
       default:
-        return "";
+        return '';
     }
   }
 
   function logoff() {
-    userLogged.token = "";
+    userLogged.token = '';
     return <Redirect to="/" />;
   }
 
@@ -93,17 +60,17 @@ const PageHeader = (props) => {
       <Divider />
       <List>
         {!userLogged.token && (
-          <ListItem button component={Link} to={"./login"}>
+          <ListItem button component={Link} to={'/login'}>
             <ListItemText primary="Entrar" />
           </ListItem>
         )}
 
-        <ListItem button component={Link} to={"./veiculos"}>
+        <ListItem button component={Link} to={'/veiculos'}>
           <ListItemText primary="Veículos" />
         </ListItem>
 
         {userLogged.token &&
-          ["./dashboard", "/marcas", "./usuarios"].map((path) => (
+          ['/dashboard', '/marcas', '/usuarios'].map((path) => (
             <ListItem
               button
               component={Link}
@@ -116,12 +83,7 @@ const PageHeader = (props) => {
 
         {userLogged.token && (
           <ListItem button component={Link}>
-            <ListItemText
-              primary="Sair"
-              onClick={() => {
-                logoff();
-              }}
-            />
+            <ListItemText primary="Sair" onClick={logoff} />
           </ListItem>
         )}
 
@@ -181,6 +143,7 @@ const PageHeader = (props) => {
           </Drawer>
         </Hidden>
       </nav>
+
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {props.children}

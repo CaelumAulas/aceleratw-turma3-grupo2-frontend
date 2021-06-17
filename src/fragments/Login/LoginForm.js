@@ -1,21 +1,21 @@
-import React, { useState, useContext } from "react";
-import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
-import TextInput from "components/TextInput/TextInput";
-import CustomButton from "components/CustomButton/CustomButton";
-import { Link, useHistory } from "react-router-dom";
-import UserLoggedContext from "../../contexts/UserLoggedContext";
+import React, { useState, useContext } from 'react';
+import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
+import TextInput from 'components/TextInput/TextInput';
+import CustomButton from 'components/CustomButton/CustomButton';
+import { Link, useHistory } from 'react-router-dom';
+import UserLoggedContext from '../../contexts/UserLoggedContext';
 
 const LoginForm = () => {
   const history = useHistory();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const userLogged = useContext(UserLoggedContext);
 
   async function handleLogin() {
     await fetch(`http://localhost:8080/auth`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name: username,
@@ -25,7 +25,7 @@ const LoginForm = () => {
       .then((response) => response.json())
       .then((data) => {
         userLogged.token = data.token;
-        history.push("./dashboard");
+        history.push('./dashboard');
       });
   }
 
@@ -54,7 +54,6 @@ const LoginForm = () => {
         />
         <CustomButton label="Logar" />
         <p>
-          {" "}
           Não tem conta? <Link to="/usuarios/cadastro"> Cadastra-se</Link>
         </p>
       </form>

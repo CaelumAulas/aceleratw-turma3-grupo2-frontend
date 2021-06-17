@@ -4,15 +4,15 @@ import React, {
   useMemo,
   useCallback,
   useContext,
-} from "react";
-import { useHistory } from "react-router-dom";
-import UserLoggedContext from "contexts/UserLoggedContext";
+} from 'react';
+import { useHistory } from 'react-router-dom';
+import UserLoggedContext from 'contexts/UserLoggedContext';
 
-import useConfirm from "hooks/useConfirm";
-import useLoadingContext from "hooks/useLoadingContext";
+import useConfirm from 'hooks/useConfirm';
+import useLoadingContext from 'hooks/useLoadingContext';
 
-import CustomTable from "components/CustomTable/CustomTable";
-import CustomTableOptions from "components/CustomTable/CustomTableOptions";
+import CustomTable from 'components/CustomTable/CustomTable';
+import CustomTableOptions from 'components/CustomTable/CustomTableOptions';
 
 const ListVehicleTable = () => {
   const history = useHistory();
@@ -56,13 +56,13 @@ const ListVehicleTable = () => {
       if (vehiclesSelectedQuantity) {
         vehiclesSelected.forEach((vehiclesSelected) => {
           fetch(`http://localhost:8080/vehicle/${vehiclesSelected.id}`, {
-            method: "delete",
+            method: 'delete',
             headers: {
-              Authorization: "Bearer " + userLogged.token,
+              Authorization: 'Bearer ' + userLogged.token,
             },
           }).then(() => {
             // Verify refresh table
-            fetch("http://localhost:8080/vehicle")
+            fetch('http://localhost:8080/vehicle')
               .then((data) => data.json())
               .then((response) => {
                 setVehicles(response.content);
@@ -75,7 +75,7 @@ const ListVehicleTable = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:8080/vehicle")
+    fetch('http://localhost:8080/vehicle')
       .then((data) => data.json())
       .then((response) => {
         if (response?.content?.length) {
@@ -101,9 +101,9 @@ const ListVehicleTable = () => {
     <>
       <CustomTable
         customTableProps={{
-          title: "Veículos",
+          title: 'Veículos',
           data: vehiclesData,
-          columns: ["Marca", "Modelo", "Ano", "Valor"],
+          columns: ['Marca', 'Modelo', 'Ano', 'Valor'],
           options,
         }}
       />
@@ -112,11 +112,11 @@ const ListVehicleTable = () => {
           handleDelete={handleDeleteVehicle}
           handleUpdate={() =>
             history.push({
-              pathname: "/veiculos/cadastro/",
+              pathname: '/veiculos/cadastro/',
               state: vehiclesSelected[0],
             })
           }
-          handleNewRegister={() => history.push("/veiculos/cadastro")}
+          handleNewRegister={() => history.push('/veiculos/cadastro')}
           itemsSelected={vehiclesSelectedQuantity}
         />
       )}

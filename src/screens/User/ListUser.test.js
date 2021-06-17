@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import LoadingProvider from 'contexts/LoadingContext';
-import ListVehicle from './ListVehicle';
+import ListUser from './ListUser';
 
-describe('<ListVehicle', () => {
+describe('<ListUser', () => {
   it('should return a table', () => {
     render(
       <LoadingProvider>
-        <ListVehicle />
+        <ListUser />
       </LoadingProvider>
     );
     const element = document.querySelector('table');

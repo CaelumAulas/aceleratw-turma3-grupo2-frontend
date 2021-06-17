@@ -1,42 +1,42 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
 
-import ListBrandTable from "./ListBrandTable";
-import LoadingProvider from "contexts/LoadingContext";
+import ListBrandTable from './ListBrandTable';
+import LoadingProvider from 'contexts/LoadingContext';
 
-describe("<ListBrandTable />", () => {
-  it("should render an delete button", () => {
+describe('<ListBrandTable />', () => {
+  it('should render an delete button', () => {
     render(
       <LoadingProvider>
         <ListBrandTable />
       </LoadingProvider>
     );
-    const brandListDeleteButton = screen.getByRole("button", {
-      name: "Excluir",
+    const brandListDeleteButton = screen.getByRole('button', {
+      name: 'Excluir',
     });
     expect(brandListDeleteButton).toBeInTheDocument();
   });
 
-  it("should render an update button", () => {
+  it('should render an update button', () => {
     render(
       <LoadingProvider>
         <ListBrandTable />
       </LoadingProvider>
     );
-    const brandListDeleteButton = screen.getByRole("button", {
-      name: "Alterar",
+    const brandListDeleteButton = screen.getByRole('button', {
+      name: 'Alterar',
     });
     expect(brandListDeleteButton).toBeInTheDocument();
   });
 
-  it("should render an add button", async () => {
+  it('should render an add button', async () => {
     render(
       <LoadingProvider>
         <ListBrandTable />
       </LoadingProvider>
     );
-    const brandListDeleteButton = screen.getByRole("button", {
-      name: "Incluir",
+    const brandListDeleteButton = screen.getByRole('button', {
+      name: 'Incluir',
     });
     expect(brandListDeleteButton).toBeInTheDocument();
   });

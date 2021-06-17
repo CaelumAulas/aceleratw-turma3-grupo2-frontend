@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
-import PropTypes from "prop-types";
-import MUIDataTable from "mui-datatables";
+import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
+import MUIDataTable from 'mui-datatables';
 
 const CustomTable = ({ customTableProps }) => {
   const { title, data, columns, options } = customTableProps;
@@ -10,37 +10,37 @@ const CustomTable = ({ customTableProps }) => {
       ...options,
       download: false,
       print: false,
-      filterType: "checkbox",
+      filterType: 'checkbox',
       textLabels: {
         body: {
-          noMatch: "Nenhum registro encontrado",
-          toolTip: "Sort",
+          noMatch: 'Nenhum registro encontrado',
+          toolTip: 'Sort',
           columnHeaderTooltip: (column) => `Sort for ${column.label}`,
         },
         toolbar: {
-          search: "Pesquisar",
-          viewColumns: "Visualizar Colunas",
-          filterTable: "Filtrar",
+          search: 'Pesquisar',
+          viewColumns: 'Visualizar Colunas',
+          filterTable: 'Filtrar',
         },
         filter: {
-          all: "Todas",
-          title: "FILTROS",
-          reset: "LIMPAR",
+          all: 'Todas',
+          title: 'FILTROS',
+          reset: 'LIMPAR',
         },
         viewColumns: {
-          title: "Visualizar",
-          titleAria: "Mostrar/Esconder Colunas",
+          title: 'Visualizar',
+          titleAria: 'Mostrar/Esconder Colunas',
         },
         selectedRows: {
-          text: "registro(s) selecionados",
+          text: 'registro(s) selecionados',
           delete: false,
-          deleteAria: "Excluir registros selecionados",
+          deleteAria: 'Excluir registros selecionados',
         },
         pagination: {
-          next: "Próxima Página",
-          previous: "Página Anterior",
-          rowsPerPage: "Registros por página:",
-          displayRows: "de",
+          next: 'Próxima Página',
+          previous: 'Página Anterior',
+          rowsPerPage: 'Registros por página:',
+          displayRows: 'de',
         },
       },
     }),
