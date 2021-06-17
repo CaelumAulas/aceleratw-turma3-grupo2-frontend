@@ -34,16 +34,19 @@ const ListUserTable = () => {
           color="secondary"
           label="Excluir"
           className={classes.deleteButton}
+          data-testid="user-list-delete-button"
         />
         <CustomButton
           variant="contained"
           label="Alterar"
           className={classes.updateButton}
+          data-testid="user-list-update-button"
         />
         <CustomButton
           type="submit"
           label="Incluir"
           className={classes.submitButton}
+          data-testid="user-list-add-button"
         />
       </div>
     </>

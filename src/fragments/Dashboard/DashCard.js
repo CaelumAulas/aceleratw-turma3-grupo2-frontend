@@ -39,14 +39,29 @@ const DashCard = ({ size, brand, quantity, value }) => {
           direction="column"
           className={classes.paperContent}
         >
-          <Typography align="center" variant="h3" component="h3">
+          <Typography
+            align="center"
+            variant="h3"
+            component="h3"
+            data-testid="dashcard-brand-name"
+          >
             {brand}
           </Typography>
           <Container>
-            <Typography align="center" variant="inherit" component="p">
+            <Typography
+              align="center"
+              variant="inherit"
+              component="p"
+              data-testid="dashcard-quantity"
+            >
               {quantity} {quantity > 1 ? "veículos" : "veículo"}
             </Typography>
-            <Typography align="center" variant="inherit" component="p">
+            <Typography
+              align="center"
+              variant="inherit"
+              component="p"
+              data-testid="dashcard-price"
+            >
               {new Intl.NumberFormat("pt-BR", {
                 style: "currency",
                 currency: "BRL",

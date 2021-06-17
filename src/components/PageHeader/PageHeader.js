@@ -17,6 +17,7 @@ import {
 import { Link, Redirect, useLocation } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import UserLoggedContext from "../../contexts/UserLoggedContext";
+import PropTypes from "prop-types";
 
 const drawerWidth = 240;
 
@@ -186,6 +187,10 @@ const PageHeader = (props) => {
       </main>
     </div>
   );
+};
+
+PageHeader.propTypes = {
+  children: PropTypes.element.isRequired,
 };
 
 export default PageHeader;

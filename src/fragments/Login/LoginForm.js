@@ -41,6 +41,7 @@ const LoginForm = () => {
           value={username}
           id="username"
           label="Usuário"
+          data-testid="login-username-input"
           onChange={(e) => setUsername(e.target.value)}
         />
         <TextInput
@@ -48,9 +49,10 @@ const LoginForm = () => {
           id="password"
           label="Senha"
           type="password"
+          data-testid="login-password-input"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <CustomButton label="Entrar" />
+        <CustomButton label="Logar" />
         <p>
           {" "}
           Não tem conta? <Link to="/usuarios/cadastro"> Cadastra-se</Link>
