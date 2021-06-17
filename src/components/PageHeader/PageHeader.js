@@ -14,7 +14,7 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Redirect, useLocation } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import UserLoggedContext from "../../contexts/UserLoggedContext";
 
@@ -81,14 +81,21 @@ const PageHeader = (props) => {
     }
   }
 
+  function logoff() {
+    userLogged.token = "";
+    return <Redirect to="/" />;
+  }
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        <ListItem button component={Link} to={"./login"}>
-          <ListItemText primary="Entrar" />
-        </ListItem>
+        {!userLogged.token && (
+          <ListItem button component={Link} to={"./login"}>
+            <ListItemText primary="Entrar" />
+          </ListItem>
+        )}
 
         <ListItem button component={Link} to={"./veiculos"}>
           <ListItemText primary="Veículos" />
@@ -106,8 +113,19 @@ const PageHeader = (props) => {
             </ListItem>
           ))}
 
+        {userLogged.token && (
+          <ListItem button component={Link}>
+            <ListItemText
+              primary="Sair"
+              onClick={() => {
+                logoff();
+              }}
+            />
+          </ListItem>
+        )}
+
         {!userLogged.token && (
-          <ListItem component={Link} to="/">
+          <ListItem button component={Link} to="/">
             <ListItemText primary={location.text} />
           </ListItem>
         )}
