@@ -31,9 +31,9 @@ const BrandRegistrationForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ name: brandValue }),
-      });
+      }).then(() => history.push("/marcas"));
     }
-  }, [brandValue, routeState]);
+  }, [brandValue, history, routeState]);
 
   return (
     <GridFullHeight container direction="column" alignItems="center">
