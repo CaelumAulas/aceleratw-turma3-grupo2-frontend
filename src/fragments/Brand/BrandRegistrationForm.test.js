@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import BrandRegistrationForm from "./BrandRegistrationForm";
+import LoadingProvider from "contexts/LoadingContext";
 
 jest.mock("react-router-dom", () => ({
   useLocation: jest.fn().mockReturnValue({
@@ -17,12 +18,20 @@ jest.mock("react-router-dom", () => ({
 
 describe("<BrandRegistrationForm />", () => {
   it("should render an input to insert brand value", async () => {
-    render(<BrandRegistrationForm />);
+    render(
+      <LoadingProvider>
+        <BrandRegistrationForm />
+      </LoadingProvider>
+    );
     const brandInput = await screen.findByTestId("register-brand-input");
     expect(brandInput).toBeInTheDocument();
   });
   it("should render a button to send new brand value", async () => {
-    render(<BrandRegistrationForm />);
+    render(
+      <LoadingProvider>
+        <BrandRegistrationForm />
+      </LoadingProvider>
+    );
     const brandSendButton = await screen.findByTestId("register-brand-button");
     expect(brandSendButton).toBeInTheDocument();
   });

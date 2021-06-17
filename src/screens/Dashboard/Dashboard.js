@@ -40,12 +40,7 @@ const mockedData = [
 const Dashboard = () => {
   const classes = useStyles();
   return (
-    <GridFullHeight
-      container
-      direction="column"
-      justify="center"
-      alignItems="flex-end"
-    >
+    <GridFullHeight container direction="column" alignItems="center">
       <Grid container direction="column" className={classes.root} spacing={2}>
         <Grid item xs={12}>
           <Grid

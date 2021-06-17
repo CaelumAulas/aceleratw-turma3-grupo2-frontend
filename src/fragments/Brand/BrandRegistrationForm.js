@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from "react";
+import { useLocation, useHistory } from "react-router-dom";
+
 import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
 import TextInput from "components/TextInput/TextInput";
 import CustomButton from "components/CustomButton/CustomButton";
+
 import brandStyles from "./styles";
-import { useLocation, useHistory } from "react-router-dom";
 
 const BrandRegistrationForm = () => {
   const routeState = useLocation()?.state;
@@ -29,17 +31,12 @@ const BrandRegistrationForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ name: brandValue }),
-      });
+      }).then(() => history.push("/marcas"));
     }
-  }, [brandValue, routeState]);
+  }, [brandValue, history, routeState]);
 
   return (
-    <GridFullHeight
-      container
-      direction="column"
-      justify="center"
-      alignItems="center"
-    >
+    <GridFullHeight container direction="column" alignItems="center">
       <form
         onSubmit={(e) => {
           e.preventDefault();

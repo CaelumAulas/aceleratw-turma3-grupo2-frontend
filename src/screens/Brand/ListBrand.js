@@ -1,12 +1,12 @@
 import React from "react";
-import { ContainerFullHeight } from "components/ContainerFullHeight/ContainerFullHeight";
+import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
 import ListBrandTable from "fragments/Brand/ListBrandTable";
 
 const ListBrand = () => {
   return (
-    <ContainerFullHeight>
+    <GridFullHeight>
       <ListBrandTable />
-    </ContainerFullHeight>
+    </GridFullHeight>
   );
 };
 

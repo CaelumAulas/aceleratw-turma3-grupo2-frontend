@@ -1,11 +1,14 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/require-default-props */
 import React from "react";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@material-ui/core";
+import PropTypes from "prop-types";
 
 const ConfirmDialog = ({ open, options, onCancel, onConfirm, onClose }) => {
   const {
@@ -31,6 +34,7 @@ const ConfirmDialog = ({ open, options, onCancel, onConfirm, onClose }) => {
           {...cancellationButtonProps}
           color="secondary"
           onClick={onCancel}
+          data-testid="cancel-button"
         >
           {cancellationText}
         </Button>
@@ -38,12 +42,21 @@ const ConfirmDialog = ({ open, options, onCancel, onConfirm, onClose }) => {
           color="primary"
           {...confirmationButtonProps}
           onClick={onConfirm}
+          data-testid="confirm-button"
         >
           {confirmationText}
         </Button>
       </DialogActions>
     </Dialog>
   );
+};
+
+ConfirmDialog.propTypes = {
+  open: PropTypes.bool,
+  options: PropTypes.object,
+  onCancel: PropTypes.func,
+  onConfirm: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 export default ConfirmDialog;

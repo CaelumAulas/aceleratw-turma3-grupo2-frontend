@@ -1,12 +1,12 @@
 import React from "react";
-import { ContainerFullHeight } from "components/ContainerFullHeight/ContainerFullHeight";
+import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
 import ListUserTable from "fragments/User/ListUserTable";
 
 const ListUsers = () => {
   return (
-    <ContainerFullHeight>
+    <GridFullHeight>
       <ListUserTable />
-    </ContainerFullHeight>
+    </GridFullHeight>
   );
 };
 

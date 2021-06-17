@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory, useLocation } from "react-router-dom";
+import { MenuItem, Select, InputLabel, FormControl } from "@material-ui/core";
+
 import CustomButton from "components/CustomButton/CustomButton";
 import { GridFullHeight } from "components/GridFullHeight/GridFullHeight";
 import TextInput from "components/TextInput/TextInput";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import vehicleStyles from "./styles";
-import { useHistory, useLocation } from "react-router-dom";
+
 import UserLoggedContext from "contexts/UserLoggedContext";
-import useFormValidators from "hooks/useFormValidators";
 import VehicleFormContext from "contexts/VehicleFormContext";
+import useFormValidators from "hooks/useFormValidators";
+
+import vehicleStyles from "./styles";
 
 const VehicleForm = () => {
   const history = useHistory();
@@ -22,7 +22,6 @@ const VehicleForm = () => {
     year: "",
     price: "0",
   });
-
   const [brandData, setBrandData] = useState([]);
   const userLogged = useContext(UserLoggedContext);
   const formValidations = useContext(VehicleFormContext);
@@ -49,14 +48,14 @@ const VehicleForm = () => {
     });
   }, [routeState, userLogged]);
 
-  function updateField(field) {
+  const updateField = (field) => {
     setFormData({
       ...formData,
       ...field,
     });
-  }
+  };
 
-  async function handleVehicleFormSubmit() {
+  const handleVehicleFormSubmit = () => {
     if (isFormValid) {
       const { url, method } = routeState
         ? {
@@ -72,7 +71,7 @@ const VehicleForm = () => {
         method,
         headers: {
           Accept: "application/vnd.vtex.ds.v10+json",
-          Authorization: "Bearer " + userLogged.token,
+          Authorization: `Bearer ${userLogged.token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -85,7 +84,7 @@ const VehicleForm = () => {
         history.push("/veiculos");
       });
     }
-  }
+  };
 
   return (
     <GridFullHeight container direction="column" alignItems="center">
