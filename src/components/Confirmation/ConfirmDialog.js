@@ -22,7 +22,13 @@ const ConfirmDialog = ({ open, options, onCancel, onConfirm, onClose }) => {
   } = options;
 
   return (
-    <Dialog fullWidth {...dialogProps} open={open} onClose={onClose}>
+    <Dialog
+      fullWidth
+      {...dialogProps}
+      open={open}
+      onClose={onClose}
+      data-testid="dialog-container"
+    >
       {title && <DialogTitle>{title}</DialogTitle>}
       {description && (
         <DialogContent>

@@ -12,9 +12,8 @@ const UserRegistrationForm = () => {
 
   function handleRegisterUser() {
     fetch(`http://localhost:8080/users`, {
-      method: "post",
+      method: "POST",
       headers: {
-        Accept: "application/vnd.vtex.ds.v10+json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

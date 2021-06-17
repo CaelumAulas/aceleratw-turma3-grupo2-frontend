@@ -54,7 +54,6 @@ const LoginForm = () => {
         />
         <CustomButton label="Logar" />
         <p>
-          {" "}
           Não tem conta? <Link to="/usuarios/cadastro"> Cadastra-se</Link>
         </p>
       </form>

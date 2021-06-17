@@ -5,7 +5,7 @@ import UserForgotPasswordForm from "fragments/User/UserForgotPasswordForm";
 const UserForgotPassword = () => {
   return (
     <ContainerFullHeight>
-        <UserForgotPasswordForm/>
+      <UserForgotPasswordForm />
     </ContainerFullHeight>
   );
 };
