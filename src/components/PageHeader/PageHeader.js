@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 
 import UserLoggedContext from 'contexts/UserLoggedContext';
 
-import headerStyles from './styles';
+import headerStyles from './headerStyles';
 
 const PageHeader = (props) => {
   const classes = headerStyles();

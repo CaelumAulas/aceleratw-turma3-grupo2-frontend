@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, queryByAttribute } from '@testing-library/react';
+import { render, queryByAttribute } from '@testing-library/react';
 import LoadingProvider from 'contexts/LoadingContext';
 
 import TextInput from './TextInput';
