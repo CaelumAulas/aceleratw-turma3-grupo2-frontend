@@ -15,6 +15,6 @@ describe("<PageHeader />", () => {
       </BrowserRouter>
     );
     const listContainer = await screen.findByRole("list");
-    expect(listContainer.children.length).toBeGreaterThan(4);
+    expect(listContainer.children.length).toBeGreaterThan(2);
   });
 });

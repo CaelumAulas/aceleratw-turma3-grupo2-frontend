@@ -3,6 +3,19 @@ import { render, screen } from "@testing-library/react";
 import VehicleForm from "./VehicleForm";
 import LoadingProvider from "contexts/LoadingContext";
 
+jest.mock("react-router-dom", () => ({
+  useLocation: jest.fn().mockReturnValue({
+    pathname: "/veiculos/cadastro",
+    search: "",
+    hash: "",
+    state: undefined,
+    key: "5nvxpbdafa",
+  }),
+  useHistory: jest.fn().mockReturnValue({
+    push: jest.fn(),
+  }),
+}));
+
 describe("vehicle form", () => {
   it("should render an add button", async () => {
     render(

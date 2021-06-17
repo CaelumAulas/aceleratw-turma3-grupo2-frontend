@@ -4,24 +4,6 @@ import ListVehicleTable from "./ListVehicleTable";
 import LoadingProvider from "contexts/LoadingContext";
 
 describe("vehicle list", () => {
-  it("should render an add button", async () => {
-    render(
-      <LoadingProvider>
-        <ListVehicleTable />
-      </LoadingProvider>
-    );
-    screen.getByRole("button", { name: "Incluir" });
-  });
-
-  it("should render an update button", async () => {
-    render(
-      <LoadingProvider>
-        <ListVehicleTable />
-      </LoadingProvider>
-    );
-    screen.getByRole("button", { name: "Alterar" });
-  });
-
   describe("table vehicle", () => {
     it("should render table", async () => {
       render(

@@ -5,30 +5,28 @@ import ListBrandTable from "./ListBrandTable";
 import LoadingProvider from "contexts/LoadingContext";
 
 describe("<ListBrandTable />", () => {
-  it("should render an delete button", async () => {
+  it("should render an delete button", () => {
     render(
       <LoadingProvider>
         <ListBrandTable />
       </LoadingProvider>
     );
-    const brandListDeleteButton = await screen.findByTestId(
-      "brand-list-delete-button"
-    );
+    const brandListDeleteButton = screen.getByRole("button", {
+      name: "Excluir",
+    });
     expect(brandListDeleteButton).toBeInTheDocument();
-    expect(brandListDeleteButton).toHaveTextContent("Excluir");
   });
 
-  it("should render an update button", async () => {
+  it("should render an update button", () => {
     render(
       <LoadingProvider>
         <ListBrandTable />
       </LoadingProvider>
     );
-    const brandListDeleteButton = await screen.findByTestId(
-      "brand-list-update-button"
-    );
+    const brandListDeleteButton = screen.getByRole("button", {
+      name: "Alterar",
+    });
     expect(brandListDeleteButton).toBeInTheDocument();
-    expect(brandListDeleteButton).toHaveTextContent("Alterar");
   });
 
   it("should render an add button", async () => {
@@ -37,10 +35,9 @@ describe("<ListBrandTable />", () => {
         <ListBrandTable />
       </LoadingProvider>
     );
-    const brandListDeleteButton = await screen.findByTestId(
-      "brand-list-add-button"
-    );
+    const brandListDeleteButton = screen.getByRole("button", {
+      name: "Incluir",
+    });
     expect(brandListDeleteButton).toBeInTheDocument();
-    expect(brandListDeleteButton).toHaveTextContent("Incluir");
   });
 });
