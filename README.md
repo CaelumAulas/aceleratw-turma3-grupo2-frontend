@@ -8,6 +8,8 @@
 
 Link de acesso online: https://g2-acelera-front.herokuapp.com/
 
+Link no Sonar Cloud: https://sonarcloud.io/dashboard?id=RonaldoCaetano_aceleratw-turma3-grupo2-frontend
+
 ## Scripts Disponíveis
 
 ### `npm start`
