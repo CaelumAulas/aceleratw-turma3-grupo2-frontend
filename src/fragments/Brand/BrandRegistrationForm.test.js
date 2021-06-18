@@ -35,4 +35,15 @@ describe('<BrandRegistrationForm />', () => {
     const brandSendButton = await screen.findByTestId('register-brand-button');
     expect(brandSendButton).toBeInTheDocument();
   });
+
+  describe('should render inputs', () => {
+    it('should render input brand', async () => {
+      render(
+        <LoadingProvider>
+          <BrandRegistrationForm />
+        </LoadingProvider>
+      );
+      screen.getByRole('textbox', { name: 'Marca' });
+    });
+  });
 });
