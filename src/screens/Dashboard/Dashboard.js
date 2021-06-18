@@ -28,7 +28,7 @@ const Dashboard = () => {
   const formatVehiclesResponse = useCallback((response) => {
     return response.reduce((acc, { brand, brandId, model, price }) => {
       const brandIndexInAccumulator = acc.findIndex(
-        (acc) => acc.brandName === brand
+        (brandIndex) => brandIndex.brandName === brand
       );
 
       if (brandIndexInAccumulator !== -1) {
@@ -40,10 +40,13 @@ const Dashboard = () => {
           },
         ];
 
-        const totalValue = mergedVehicles.reduce((acc, vehicleMerged) => {
-          acc = acc + vehicleMerged.price;
-          return acc;
-        }, 0);
+        const totalValue = mergedVehicles.reduce(
+          (mergedVehiclesAcc, vehicleMerged) => {
+            mergedVehiclesAcc = mergedVehiclesAcc + vehicleMerged.price;
+            return mergedVehiclesAcc;
+          },
+          0
+        );
 
         const newAccumulator = {
           ...acc[brandIndexInAccumulator],
