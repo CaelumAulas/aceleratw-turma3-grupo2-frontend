@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://g2-acelera-api.herokuapp.com';
+export const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 export const BEARER_TOKEN = localStorage.getItem('Token');
 export const HEADERS = {
   Accept: 'application/json',
