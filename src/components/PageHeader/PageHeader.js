@@ -37,7 +37,7 @@ const PageHeader = (props) => {
         return 'Marcas';
       case '/usuarios':
         return 'Usuários';
-      case '/dashboard':
+      case '/inicio':
         return 'Dashboard';
       case '/login':
         return 'Entrar';
@@ -69,7 +69,7 @@ const PageHeader = (props) => {
         </ListItem>
 
         {userLogged &&
-          ['/dashboard', '/marcas', '/usuarios'].map((path) => (
+          ['/inicio', '/marcas', '/usuarios'].map((path) => (
             <ListItem
               button
               component={Link}
