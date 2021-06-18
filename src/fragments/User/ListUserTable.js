@@ -3,7 +3,9 @@ import { useHistory } from 'react-router-dom';
 
 import CustomButton from 'components/CustomButton/CustomButton';
 import CustomTable from 'components/CustomTable/CustomTable';
+
 import useConfirm from 'hooks/useConfirm';
+import useLoadingContext from 'hooks/useLoadingContext';
 
 import userStyles from './userStyles';
 
@@ -17,6 +19,7 @@ const ListUserTable = () => {
 
   const confirm = useConfirm();
   const history = useHistory();
+  const { setLoading } = useLoadingContext();
 
   const options = useMemo(
     () => ({
@@ -52,6 +55,7 @@ const ListUserTable = () => {
             method: 'delete',
             headers: HEADERS,
           }).then(() => {
+            setLoading(true);
             fetch(`${BASE_URL}/users`, {
               method: 'get',
               headers: HEADERS,
@@ -60,17 +64,19 @@ const ListUserTable = () => {
               .then((response) => {
                 if (response?.content?.length) {
                   setUsers(response.content);
+                  setLoading(false);
                 }
               });
           });
         });
       }
     });
-  }, [confirm, usersSelected]);
+  }, [confirm, setLoading, usersSelected]);
 
   const usersName = useMemo(() => users.map((user) => [user.name]), [users]);
 
   useEffect(() => {
+    setLoading(true);
     fetch(`${BASE_URL}/users`, {
       method: 'get',
       headers: HEADERS,
@@ -79,9 +85,10 @@ const ListUserTable = () => {
       .then((response) => {
         if (response?.content?.length) {
           setUsers(response.content);
+          setLoading(false);
         }
       });
-  }, []);
+  }, [setLoading]);
 
   return (
     <>
