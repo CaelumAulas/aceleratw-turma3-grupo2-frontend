@@ -4,6 +4,8 @@ import userEvent from '@testing-library/user-event';
 
 import UserRegistrationForm from './UserRegistrationForm';
 
+import { BASE_URL } from 'api/config';
+
 beforeAll(() => jest.spyOn(window, 'fetch'));
 
 describe('<UserRegistrationForm />', () => {
@@ -22,7 +24,7 @@ describe('<UserRegistrationForm />', () => {
     userEvent.click(screen.getByRole('button', { name: /Cadastrar/i }));
 
     expect(window.fetch).toHaveBeenCalledWith(
-      'http://localhost:8080/users',
+      `${BASE_URL}/users`,
       expect.objectContaining({
         method: 'POST',
         headers: {

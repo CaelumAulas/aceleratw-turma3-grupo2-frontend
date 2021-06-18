@@ -23,7 +23,7 @@ export default function Routes() {
             <Route exact path="/" component={ListVehicle} />
             <Route path="/login" component={Login} />
             <Route path="/recuperar-senha" component={UserForgotPassword} />
-            <PrivateRoute path="/dashboard">
+            <PrivateRoute path="/inicio">
               <Dashboard />
             </PrivateRoute>
             <PrivateRoute

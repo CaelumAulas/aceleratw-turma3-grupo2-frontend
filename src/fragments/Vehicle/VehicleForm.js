@@ -10,6 +10,8 @@ import UserLoggedContext from 'contexts/UserLoggedContext';
 import VehicleFormContext from 'contexts/VehicleFormContext';
 import useFormValidators from 'hooks/useFormValidators';
 
+import { BASE_URL } from 'api/config';
+
 import vehicleStyles from './vehicleStyles';
 
 const VehicleForm = () => {
@@ -28,7 +30,7 @@ const VehicleForm = () => {
   const [isFormValid] = useFormValidators(formValidations);
 
   useEffect(() => {
-    fetch('http://localhost:8080/brands', {
+    fetch(`${BASE_URL}/brands`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -59,11 +61,11 @@ const VehicleForm = () => {
     if (isFormValid) {
       const { url, method } = routeState
         ? {
-            url: `http://localhost:8080/vehicle/${routeState.id}`,
+            url: `${BASE_URL}/vehicle/${routeState.id}`,
             method: 'put',
           }
         : {
-            url: 'http://localhost:8080/vehicle',
+            url: `${BASE_URL}/vehicle`,
             method: 'post',
           };
 

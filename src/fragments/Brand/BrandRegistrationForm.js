@@ -5,6 +5,8 @@ import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
 import TextInput from 'components/TextInput/TextInput';
 import CustomButton from 'components/CustomButton/CustomButton';
 
+import { BASE_URL } from 'api/config';
+
 import brandStyles from './brandStyles';
 
 const BrandRegistrationForm = () => {
@@ -17,11 +19,11 @@ const BrandRegistrationForm = () => {
     if (brandValue !== '') {
       const { url, method } = routeState
         ? {
-            url: `http://localhost:8080/brands/${routeState.id}`,
+            url: `${BASE_URL}/brands/${routeState.id}`,
             method: 'put',
           }
         : {
-            url: 'http://localhost:8080/brands',
+            url: `${BASE_URL}/brands`,
             method: 'post',
           };
       fetch(url, {

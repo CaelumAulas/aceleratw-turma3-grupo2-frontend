@@ -14,6 +14,8 @@ import useLoadingContext from 'hooks/useLoadingContext';
 import CustomTable from 'components/CustomTable/CustomTable';
 import CustomTableOptions from 'components/CustomTable/CustomTableOptions';
 
+import { BASE_URL } from 'api/config';
+
 const ListVehicleTable = () => {
   const history = useHistory();
   const confirm = useConfirm();
@@ -55,14 +57,14 @@ const ListVehicleTable = () => {
     }).then(() => {
       if (vehiclesSelectedQuantity) {
         vehiclesSelected.forEach((vehicleSelected) => {
-          fetch(`http://localhost:8080/vehicle/${vehicleSelected.id}`, {
+          fetch(`${BASE_URL}/vehicle/${vehicleSelected.id}`, {
             method: 'delete',
             headers: {
               Authorization: 'Bearer ' + userLogged.token,
             },
           }).then(() => {
             // Verify refresh table
-            fetch('http://localhost:8080/vehicle')
+            fetch(`${BASE_URL}/vehicle`)
               .then((data) => data.json())
               .then((response) => {
                 setVehicles(response.content);
@@ -75,7 +77,7 @@ const ListVehicleTable = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:8080/vehicle')
+    fetch(`${BASE_URL}/vehicle`)
       .then((data) => data.json())
       .then((response) => {
         if (response?.content?.length) {

@@ -7,6 +7,8 @@ import useLoadingContext from 'hooks/useLoadingContext';
 import CustomTable from 'components/CustomTable/CustomTable';
 import CustomTableOptions from 'components/CustomTable/CustomTableOptions';
 
+import { BASE_URL } from 'api/config';
+
 const ListBrandTable = () => {
   const { setLoading } = useLoadingContext();
   const history = useHistory();
@@ -45,10 +47,10 @@ const ListBrandTable = () => {
       if (brandsSelected?.length) {
         // Temporary
         brandsSelected.forEach((brandSelected) => {
-          fetch(`http://localhost:8080/brands/${brandSelected.id}`, {
+          fetch(`${BASE_URL}/brands/${brandSelected.id}`, {
             method: 'delete',
           }).then(() => {
-            fetch('http://localhost:8080/brands')
+            fetch(`${BASE_URL}/brands`)
               .then((data) => data.json())
               .then((response) => {
                 if (response?.content?.length) {
@@ -63,7 +65,7 @@ const ListBrandTable = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:8080/brands')
+    fetch(`${BASE_URL}/brands`)
       .then((data) => data.json())
       .then((response) => {
         if (response?.content?.length) {

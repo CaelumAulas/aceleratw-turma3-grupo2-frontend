@@ -3,6 +3,7 @@ import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
 import TextInput from 'components/TextInput/TextInput';
 import CustomButton from 'components/CustomButton/CustomButton';
 import userStyles from './userStyles';
+import { BASE_URL } from 'api/config';
 
 const UserRegistrationForm = () => {
   const classes = userStyles();
@@ -11,7 +12,7 @@ const UserRegistrationForm = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   function handleRegisterUser() {
-    fetch(`http://localhost:8080/users`, {
+    fetch(`${BASE_URL}/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import TextInput from 'components/TextInput/TextInput';
 import CustomButton from 'components/CustomButton/CustomButton';
 import { Link, useHistory } from 'react-router-dom';
 import UserLoggedContext from '../../contexts/UserLoggedContext';
+import { BASE_URL } from 'api/config';
 
 const LoginForm = () => {
   const history = useHistory();
@@ -12,7 +13,7 @@ const LoginForm = () => {
   const userLogged = useContext(UserLoggedContext);
 
   async function handleLogin() {
-    await fetch(`http://localhost:8080/auth`, {
+    await fetch(`${BASE_URL}/auth`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
