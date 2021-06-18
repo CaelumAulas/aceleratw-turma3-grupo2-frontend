@@ -55,7 +55,6 @@ const ListUserTable = () => {
             method: 'delete',
             headers: HEADERS(),
           }).then(() => {
-            setLoading(true);
             fetch(`${BASE_URL}/users`, {
               method: 'get',
               headers: HEADERS(),
@@ -64,14 +63,13 @@ const ListUserTable = () => {
               .then((response) => {
                 if (response?.content?.length) {
                   setUsers(response.content);
-                  setLoading(false);
                 }
               });
           });
         });
       }
     });
-  }, [confirm, setLoading, usersSelected]);
+  }, [confirm, usersSelected]);
 
   const usersName = useMemo(() => users.map((user) => [user.name]), [users]);
 
