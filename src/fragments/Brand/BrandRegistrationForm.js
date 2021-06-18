@@ -5,7 +5,7 @@ import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
 import TextInput from 'components/TextInput/TextInput';
 import CustomButton from 'components/CustomButton/CustomButton';
 
-import { BASE_URL } from 'api/config';
+import { BASE_URL, HEADERS } from 'api/config';
 
 import brandStyles from './brandStyles';
 
@@ -28,10 +28,7 @@ const BrandRegistrationForm = () => {
           };
       fetch(url, {
         method,
-        headers: {
-          Accept: 'application/vnd.vtex.ds.v10+json',
-          'Content-Type': 'application/json',
-        },
+        headers: HEADERS,
         body: JSON.stringify({ name: brandValue }),
       }).then(() => history.push('/marcas'));
     }

@@ -9,7 +9,7 @@ import TextInput from 'components/TextInput/TextInput';
 import VehicleFormContext from 'contexts/VehicleFormContext';
 import useFormValidators from 'hooks/useFormValidators';
 
-import { BASE_URL } from 'api/config';
+import { BASE_URL, HEADERS } from 'api/config';
 
 import vehicleStyles from './vehicleStyles';
 
@@ -31,10 +31,7 @@ const VehicleForm = () => {
   useEffect(() => {
     fetch(`${BASE_URL}/brands`, {
       method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + userLogged,
-      },
+      headers: HEADERS,
     })
       .then((data) => data.json())
       .then((response) => {
@@ -70,11 +67,7 @@ const VehicleForm = () => {
 
       fetch(url, {
         method,
-        headers: {
-          Accept: 'application/vnd.vtex.ds.v10+json',
-          Authorization: `Bearer ${userLogged}`,
-          'Content-Type': 'application/json',
-        },
+        headers: HEADERS,
         body: JSON.stringify({
           nameBrand: formData.brand,
           model: formData.model,

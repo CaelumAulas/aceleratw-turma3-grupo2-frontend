@@ -3,7 +3,7 @@ import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
 import TextInput from 'components/TextInput/TextInput';
 import CustomButton from 'components/CustomButton/CustomButton';
 import userStyles from './userStyles';
-import { BASE_URL } from 'api/config';
+import { BASE_URL, HEADERS } from 'api/config';
 
 const UserRegistrationForm = () => {
   const classes = userStyles();
@@ -14,9 +14,7 @@ const UserRegistrationForm = () => {
   function handleRegisterUser() {
     fetch(`${BASE_URL}/users`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: HEADERS,
       body: JSON.stringify({
         name: username,
         password: password,

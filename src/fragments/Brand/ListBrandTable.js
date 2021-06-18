@@ -5,7 +5,7 @@ import useLoadingContext from 'hooks/useLoadingContext';
 import CustomTable from 'components/CustomTable/CustomTable';
 import CustomTableOptions from 'components/CustomTable/CustomTableOptions';
 
-import { BASE_URL } from 'api/config';
+import { BASE_URL, HEADERS } from 'api/config';
 
 const ListBrandTable = () => {
   const { setLoading } = useLoadingContext();
@@ -65,10 +65,7 @@ const ListBrandTable = () => {
   useEffect(() => {
     setLoading(true);
     fetch(`${BASE_URL}/brands`, {
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + userLogged,
-      },
+      headers: HEADERS,
     })
       .then((data) => data.json())
       .then((response) => {

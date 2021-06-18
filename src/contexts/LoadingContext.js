@@ -14,7 +14,7 @@ const LoadingProvider = ({ children }) => {
 };
 
 LoadingProvider.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.any.isRequired,
 };
 
 export default LoadingProvider;

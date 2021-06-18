@@ -7,7 +7,7 @@ import useLoadingContext from 'hooks/useLoadingContext';
 import CustomTable from 'components/CustomTable/CustomTable';
 import CustomTableOptions from 'components/CustomTable/CustomTableOptions';
 
-import { BASE_URL } from 'api/config';
+import { BASE_URL, HEADERS } from 'api/config';
 
 const ListVehicleTable = () => {
   const history = useHistory();
@@ -52,9 +52,7 @@ const ListVehicleTable = () => {
         vehiclesSelected.forEach((vehicleSelected) => {
           fetch(`${BASE_URL}/vehicle/${vehicleSelected.id}`, {
             method: 'delete',
-            headers: {
-              Authorization: 'Bearer ' + userLogged,
-            },
+            headers: HEADERS,
           }).then(() => {
             // Verify refresh table
             fetch(`${BASE_URL}/vehicle`)
@@ -66,7 +64,7 @@ const ListVehicleTable = () => {
         });
       }
     });
-  }, [confirm, vehiclesSelectedQuantity, vehiclesSelected, userLogged]);
+  }, [confirm, vehiclesSelectedQuantity, vehiclesSelected]);
 
   useEffect(() => {
     setLoading(true);
