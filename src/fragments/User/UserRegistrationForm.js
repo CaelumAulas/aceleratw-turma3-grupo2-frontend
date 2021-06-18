@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+
 import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
 import TextInput from 'components/TextInput/TextInput';
 import CustomButton from 'components/CustomButton/CustomButton';
@@ -7,6 +9,8 @@ import { BASE_URL, HEADERS } from 'api/config';
 
 const UserRegistrationForm = () => {
   const classes = userStyles();
+  const location = useLocation();
+  const history = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -61,6 +65,9 @@ const UserRegistrationForm = () => {
             type="reset"
             color="secondary"
             label="Cancelar"
+            onClick={() => {
+              history.push(location?.state?.returnUrl ?? '/login');
+            }}
           />
           <CustomButton
             type="submit"

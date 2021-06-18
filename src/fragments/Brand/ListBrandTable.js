@@ -49,7 +49,10 @@ const ListBrandTable = () => {
           fetch(`${BASE_URL}/brands/${brandSelected.id}`, {
             method: 'delete',
           }).then(() => {
-            fetch(`${BASE_URL}/brands`)
+            fetch(`${BASE_URL}/brands`, {
+              method: 'get',
+              headers: HEADERS,
+            })
               .then((data) => data.json())
               .then((response) => {
                 if (response?.content?.length) {
