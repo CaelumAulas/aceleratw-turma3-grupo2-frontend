@@ -6,6 +6,8 @@
 - Ronaldo Caetano
 - Wendel Macedo
 
+Link de acesso online: https://g2-acelera-front.herokuapp.com/
+
 ## Scripts Disponíveis
 
 ### `npm start`
