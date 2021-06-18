@@ -108,13 +108,11 @@ const VehicleForm = () => {
               })
             }
           >
-            {brandData.map((brand) => {
-              return (
-                <MenuItem key={brand.name} value={brand.name}>
-                  {brand.name}
-                </MenuItem>
-              );
-            })}
+            {brandData?.map(({ name }) => (
+              <MenuItem key={name} value={name}>
+                {name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
 
