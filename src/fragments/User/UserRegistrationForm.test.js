@@ -4,7 +4,20 @@ import userEvent from '@testing-library/user-event';
 
 import UserRegistrationForm from './UserRegistrationForm';
 
-import { BASE_URL } from 'api/config';
+import { BASE_URL, HEADERS } from 'api/config';
+
+jest.mock('react-router-dom', () => ({
+  useLocation: jest.fn().mockReturnValue({
+    pathname: '/usuarios/cadastro',
+    search: '',
+    hash: '',
+    state: undefined,
+    key: '5nvxpbdafa',
+  }),
+  useHistory: jest.fn().mockReturnValue({
+    push: jest.fn(),
+  }),
+}));
 
 beforeAll(() => jest.spyOn(window, 'fetch'));
 
@@ -27,9 +40,7 @@ describe('<UserRegistrationForm />', () => {
       `${BASE_URL}/users`,
       expect.objectContaining({
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: HEADERS,
         body: formData,
       })
     );

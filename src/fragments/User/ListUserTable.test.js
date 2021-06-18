@@ -17,19 +17,6 @@ describe('<ListUserTable />', () => {
     expect(brandListDeleteButton).toHaveTextContent('Excluir');
   });
 
-  it('should render an update button', async () => {
-    render(
-      <LoadingProvider>
-        <ListUserTable />
-      </LoadingProvider>
-    );
-    const brandListDeleteButton = await screen.findByTestId(
-      'user-list-update-button'
-    );
-    expect(brandListDeleteButton).toBeInTheDocument();
-    expect(brandListDeleteButton).toHaveTextContent('Alterar');
-  });
-
   it('should render an add button', async () => {
     render(
       <LoadingProvider>
