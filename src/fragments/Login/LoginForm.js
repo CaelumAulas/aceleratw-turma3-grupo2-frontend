@@ -1,16 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
 import TextInput from 'components/TextInput/TextInput';
 import CustomButton from 'components/CustomButton/CustomButton';
 import { Link, useHistory } from 'react-router-dom';
-import UserLoggedContext from '../../contexts/UserLoggedContext';
 import { BASE_URL } from 'api/config';
 
 const LoginForm = () => {
   const history = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const userLogged = useContext(UserLoggedContext);
 
   async function handleLogin() {
     await fetch(`${BASE_URL}/auth`, {
@@ -25,7 +23,7 @@ const LoginForm = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        userLogged.token = data.token;
+        localStorage.setItem('Token', data.token);
         history.push('./dashboard');
       });
   }

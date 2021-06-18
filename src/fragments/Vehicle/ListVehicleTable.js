@@ -1,12 +1,5 @@
-import React, {
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-  useContext,
-} from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import UserLoggedContext from 'contexts/UserLoggedContext';
 
 import useConfirm from 'hooks/useConfirm';
 import useLoadingContext from 'hooks/useLoadingContext';
@@ -22,7 +15,7 @@ const ListVehicleTable = () => {
   const { setLoading } = useLoadingContext();
   const [vehicles, setVehicles] = useState([]);
   const [vehiclesSelected, setVehiclesSelected] = useState([]);
-  const userLogged = useContext(UserLoggedContext);
+  const userLogged = localStorage.getItem('Token');
   const vehiclesSelectedQuantity = vehiclesSelected.length;
 
   const options = useMemo(
@@ -60,7 +53,7 @@ const ListVehicleTable = () => {
           fetch(`${BASE_URL}/vehicle/${vehicleSelected.id}`, {
             method: 'delete',
             headers: {
-              Authorization: 'Bearer ' + userLogged.token,
+              Authorization: 'Bearer ' + userLogged,
             },
           }).then(() => {
             // Verify refresh table
@@ -73,7 +66,7 @@ const ListVehicleTable = () => {
         });
       }
     });
-  }, [confirm, vehiclesSelectedQuantity, vehiclesSelected, userLogged.token]);
+  }, [confirm, vehiclesSelectedQuantity, vehiclesSelected, userLogged]);
 
   useEffect(() => {
     setLoading(true);
@@ -109,7 +102,7 @@ const ListVehicleTable = () => {
           options,
         }}
       />
-      {userLogged.token && (
+      {userLogged && (
         <CustomTableOptions
           handleDelete={handleDeleteVehicle}
           handleUpdate={() =>

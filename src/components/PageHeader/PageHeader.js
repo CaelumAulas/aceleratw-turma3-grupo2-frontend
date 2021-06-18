@@ -17,14 +17,11 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 
-import UserLoggedContext from 'contexts/UserLoggedContext';
-
 import headerStyles from './headerStyles';
 
 const PageHeader = (props) => {
   const classes = headerStyles();
   const location = useLocation();
-  const userLogged = useContext(UserLoggedContext);
 
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -50,7 +47,7 @@ const PageHeader = (props) => {
   }
 
   function logoff() {
-    userLogged.token = '';
+    localStorage.removeItem('Token');
     return <Redirect to="/" />;
   }
 

@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
-import UserLoggedContext from '../../contexts/UserLoggedContext';
+import React from 'react';
 import { Redirect, Route } from 'react-router';
 
 export default function PrivateRoute({ children, ...rest }) {
-  const isAuthenticated = useContext(UserLoggedContext);
+  const isAuthenticated = localStorage.getItem('Token');
 
-  if (!isAuthenticated.token) return <Redirect to="/login" />;
+  if (!isAuthenticated) return <Redirect to="/login" />;
 
   return <Route {...rest}>{children}</Route>;
 }

@@ -6,7 +6,6 @@ import CustomButton from 'components/CustomButton/CustomButton';
 import { GridFullHeight } from 'components/GridFullHeight/GridFullHeight';
 import TextInput from 'components/TextInput/TextInput';
 
-import UserLoggedContext from 'contexts/UserLoggedContext';
 import VehicleFormContext from 'contexts/VehicleFormContext';
 import useFormValidators from 'hooks/useFormValidators';
 
@@ -25,7 +24,7 @@ const VehicleForm = () => {
     price: '0',
   });
   const [brandData, setBrandData] = useState([]);
-  const userLogged = useContext(UserLoggedContext);
+  const userLogged = localStorage.getItem('Token');
   const formValidations = useContext(VehicleFormContext);
   const [isFormValid] = useFormValidators(formValidations);
 
@@ -34,7 +33,7 @@ const VehicleForm = () => {
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        Authorization: 'Bearer ' + userLogged.token,
+        Authorization: 'Bearer ' + userLogged,
       },
     })
       .then((data) => data.json())
@@ -73,7 +72,7 @@ const VehicleForm = () => {
         method,
         headers: {
           Accept: 'application/vnd.vtex.ds.v10+json',
-          Authorization: `Bearer ${userLogged.token}`,
+          Authorization: `Bearer ${userLogged}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({

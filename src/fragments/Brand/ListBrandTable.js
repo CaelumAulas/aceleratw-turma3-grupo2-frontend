@@ -1,14 +1,7 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  useContext,
-} from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useConfirm from 'hooks/useConfirm';
 import useLoadingContext from 'hooks/useLoadingContext';
-import UserLoggedContext from 'contexts/UserLoggedContext';
 import CustomTable from 'components/CustomTable/CustomTable';
 import CustomTableOptions from 'components/CustomTable/CustomTableOptions';
 
@@ -19,8 +12,8 @@ const ListBrandTable = () => {
   const history = useHistory();
   const [brands, setBrands] = useState([]);
   const [brandsSelected, setBrandsSelected] = useState([]);
-  const userLogged = useContext(UserLoggedContext);
   const brandsSelectedQuantity = brandsSelected.length;
+  const userLogged = localStorage.getItem('Token');
   const confirm = useConfirm();
 
   const options = useMemo(
@@ -74,7 +67,7 @@ const ListBrandTable = () => {
     fetch(`${BASE_URL}/brands`, {
       headers: {
         Accept: 'application/json',
-        Authorization: 'Bearer ' + userLogged.token,
+        Authorization: 'Bearer ' + userLogged,
       },
     })
       .then((data) => data.json())
