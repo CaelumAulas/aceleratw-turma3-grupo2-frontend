@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useContext } from 'react';
-import { Link, Redirect, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import {
   AppBar,
   CssBaseline,
@@ -22,6 +22,8 @@ import headerStyles from './headerStyles';
 const PageHeader = (props) => {
   const classes = headerStyles();
   const location = useLocation();
+  const history = useHistory();
+  const userLogged = localStorage.getItem('Token');
 
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -48,7 +50,7 @@ const PageHeader = (props) => {
 
   function logoff() {
     localStorage.removeItem('Token');
-    return <Redirect to="/" />;
+    history.push('/login');
   }
 
   const drawer = (
@@ -56,7 +58,7 @@ const PageHeader = (props) => {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {!userLogged.token && (
+        {!userLogged && (
           <ListItem button component={Link} to={'/login'}>
             <ListItemText primary="Entrar" />
           </ListItem>
@@ -66,7 +68,7 @@ const PageHeader = (props) => {
           <ListItemText primary="Veículos" />
         </ListItem>
 
-        {userLogged.token &&
+        {userLogged &&
           ['/dashboard', '/marcas', '/usuarios'].map((path) => (
             <ListItem
               button
@@ -78,13 +80,13 @@ const PageHeader = (props) => {
             </ListItem>
           ))}
 
-        {userLogged.token && (
+        {userLogged && (
           <ListItem button component={Link}>
             <ListItemText primary="Sair" onClick={logoff} />
           </ListItem>
         )}
 
-        {!userLogged.token && (
+        {!userLogged && (
           <ListItem button component={Link} to="/">
             <ListItemText primary={location.text} />
           </ListItem>

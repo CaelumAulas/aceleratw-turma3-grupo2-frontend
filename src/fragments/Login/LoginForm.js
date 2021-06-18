@@ -24,7 +24,7 @@ const LoginForm = () => {
       .then((response) => response.json())
       .then((data) => {
         localStorage.setItem('Token', data.token);
-        history.push('./dashboard');
+        history.push('/inicio');
       });
   }
 

@@ -23,9 +23,7 @@ export default function Routes() {
             <Route exact path="/" component={ListVehicle} />
             <Route path="/login" component={Login} />
             <Route path="/recuperar-senha" component={UserForgotPassword} />
-            <PrivateRoute path="/inicio">
-              <Dashboard />
-            </PrivateRoute>
+            <PrivateRoute path="/inicio" component={Dashboard} />
             <PrivateRoute
               path="/usuarios/cadastro"
               component={UserRegistration}
@@ -34,9 +32,10 @@ export default function Routes() {
               path="/marcas/cadastro"
               component={BrandRegistration}
             />
-            <PrivateRoute path="/veiculos/cadastro">
-              <VehicleRegistration />
-            </PrivateRoute>
+            <PrivateRoute
+              path="/veiculos/cadastro"
+              component={VehicleRegistration}
+            />
             <PrivateRoute path="/usuarios" component={ListUsers} />
             <PrivateRoute path="/marcas" component={ListBrand} />
             <Route path="/veiculos" component={ListVehicle} />
