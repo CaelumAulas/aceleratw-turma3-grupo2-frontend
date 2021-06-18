@@ -18,7 +18,7 @@ const UserRegistrationForm = () => {
   function handleRegisterUser() {
     fetch(`${BASE_URL}/users`, {
       method: 'POST',
-      headers: HEADERS,
+      headers: HEADERS(),
       body: JSON.stringify({
         name: username,
         password: password,

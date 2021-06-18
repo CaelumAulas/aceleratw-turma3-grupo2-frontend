@@ -28,7 +28,7 @@ const BrandRegistrationForm = () => {
           };
       fetch(url, {
         method,
-        headers: HEADERS,
+        headers: HEADERS(),
         body: JSON.stringify({ name: brandValue }),
       }).then(() => history.push('/marcas'));
     }

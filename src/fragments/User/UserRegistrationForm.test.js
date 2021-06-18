@@ -40,7 +40,7 @@ describe('<UserRegistrationForm />', () => {
       `${BASE_URL}/users`,
       expect.objectContaining({
         method: 'POST',
-        headers: HEADERS,
+        headers: HEADERS(),
         body: formData,
       })
     );

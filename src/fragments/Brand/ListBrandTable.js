@@ -51,7 +51,7 @@ const ListBrandTable = () => {
           }).then(() => {
             fetch(`${BASE_URL}/brands`, {
               method: 'get',
-              headers: HEADERS,
+              headers: HEADERS(),
             })
               .then((data) => data.json())
               .then((response) => {
@@ -68,7 +68,7 @@ const ListBrandTable = () => {
   useEffect(() => {
     setLoading(true);
     fetch(`${BASE_URL}/brands`, {
-      headers: HEADERS,
+      headers: HEADERS(),
     })
       .then((data) => data.json())
       .then((response) => {

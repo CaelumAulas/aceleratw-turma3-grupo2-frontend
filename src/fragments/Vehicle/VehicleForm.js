@@ -31,7 +31,7 @@ const VehicleForm = () => {
   useEffect(() => {
     fetch(`${BASE_URL}/brands`, {
       method: 'GET',
-      headers: HEADERS,
+      headers: HEADERS(),
     })
       .then((data) => data.json())
       .then((response) => {
@@ -67,7 +67,7 @@ const VehicleForm = () => {
 
       fetch(url, {
         method,
-        headers: HEADERS,
+        headers: HEADERS(),
         body: JSON.stringify({
           nameBrand: formData.brand,
           model: formData.model,

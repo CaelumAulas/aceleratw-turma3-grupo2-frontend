@@ -52,7 +52,7 @@ const ListVehicleTable = () => {
         vehiclesSelected.forEach((vehicleSelected) => {
           fetch(`${BASE_URL}/vehicle/${vehicleSelected.id}`, {
             method: 'delete',
-            headers: HEADERS,
+            headers: HEADERS(),
           }).then(() => {
             // Verify refresh table
             fetch(`${BASE_URL}/vehicle`)

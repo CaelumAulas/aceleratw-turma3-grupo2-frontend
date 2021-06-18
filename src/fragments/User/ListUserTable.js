@@ -53,12 +53,12 @@ const ListUserTable = () => {
         usersSelected.forEach((userSelected) => {
           fetch(`${BASE_URL}/users/${userSelected.id}`, {
             method: 'delete',
-            headers: HEADERS,
+            headers: HEADERS(),
           }).then(() => {
             setLoading(true);
             fetch(`${BASE_URL}/users`, {
               method: 'get',
-              headers: HEADERS,
+              headers: HEADERS(),
             })
               .then((data) => data.json())
               .then((response) => {
@@ -79,7 +79,7 @@ const ListUserTable = () => {
     setLoading(true);
     fetch(`${BASE_URL}/users`, {
       method: 'get',
-      headers: HEADERS,
+      headers: HEADERS(),
     })
       .then((data) => data.json())
       .then((response) => {
