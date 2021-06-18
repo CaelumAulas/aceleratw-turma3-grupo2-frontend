@@ -23,8 +23,15 @@ const LoginForm = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        localStorage.setItem('Token', data.token);
-        history.push('/inicio');
+        if (data?.token) {
+          localStorage.setItem('Token', data.token);
+          history.push('/inicio');
+        } else {
+          alert('Usuário ou senha incorretos');
+        }
+      })
+      .catch(() => {
+        alert('Usuário ou senha incorretos');
       });
   }
 
@@ -40,6 +47,7 @@ const LoginForm = () => {
           value={username}
           id="username"
           label="Usuário"
+          required
           data-testid="login-username-input"
           onChange={(e) => setUsername(e.target.value)}
         />
@@ -48,6 +56,7 @@ const LoginForm = () => {
           id="password"
           label="Senha"
           type="password"
+          required
           data-testid="login-password-input"
           onChange={(e) => setPassword(e.target.value)}
         />
